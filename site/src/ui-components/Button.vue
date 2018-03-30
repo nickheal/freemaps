@@ -1,19 +1,20 @@
 <template>
     <button
-        :class="type"
+        class="nu-button"
+        :class="buttonClass"
         :style="{
-            boxShadow: `0px 1px ${overlayOpacity * 10}px 0px rgba(0, 0, 0, ${overlayOpacity})`,
+            boxShadow: `${-overlayOffsetFromCenter.x / 20}px ${-overlayOffsetFromCenter.y / 20}px ${overlayOpacity * 10}px 0px rgba(0, 0, 0, ${overlayOpacity})`,
             transform: `scale(${Math.max(1, 1 + overlayOpacity / 10)})`
         }"
         ref="button"
     >
         <span
-            class="cursor-highlight"
+            class="nu-button__cursor-highlight"
             :style="{ 
                 top: `${overlayPosition.y}px`,
                 left: `${overlayPosition.x}px`,
-                width: `${this.overlaySize}%`,
-                paddingBottom: `${this.overlaySize}%`,
+                width: `${overlaySize}%`,
+                paddingBottom: `${overlaySize}%`,
                 opacity: overlayOpacity
             }"
         />
@@ -37,11 +38,17 @@ export default {
         return {
             overlayPosition: { x: 0, y: 0 },
             overlaySize: 0,
-            overlayOpacity: 0
+            overlayOpacity: 0,
+            overlayOffsetFromCenter: { x: 0, y: 0 }
         }
     },
     mounted() {
         this.bindMouseEvents();
+    },
+    computed: {
+        buttonClass() {
+            return `nu-button--${this.type}`;
+        }
     },
     methods: {
         bindMouseEvents() {
@@ -52,13 +59,21 @@ export default {
             function mouseMoveEvent(e) {
                 const xRelativeToButton = e.pageX - button.offsetLeft;
                 const yRelativeToButton = e.pageY - button.offsetTop;
-                const xDistanceFromCenter = Math.abs(xRelativeToButton - (button.offsetWidth / 2));
-                const yDistanceFromCenter = Math.abs(yRelativeToButton - (button.offsetHeight / 2));
+
+                const xOffsetFromCenter = xRelativeToButton - (button.offsetWidth / 2);
+                const yOffsetFromCenter = yRelativeToButton - (button.offsetHeight / 2);
+
+                const xDistanceFromCenter = Math.abs(xOffsetFromCenter);
+                const yDistanceFromCenter = Math.abs(yOffsetFromCenter);
+                
                 const xDistanceFromCenterAsPercentage = xDistanceFromCenter / button.offsetWidth;
                 const yDistanceFromCenterAsPercentage = yDistanceFromCenter / button.offsetHeight;
 
                 self.overlayPosition.x = xRelativeToButton;
                 self.overlayPosition.y = yRelativeToButton;
+
+                self.overlayOffsetFromCenter.x = xOffsetFromCenter;
+                self.overlayOffsetFromCenter.y = yOffsetFromCenter;
 
                 self.overlaySize = 50 - ((xDistanceFromCenterAsPercentage + yDistanceFromCenterAsPercentage) * 50);
                 
@@ -66,17 +81,28 @@ export default {
                 self.overlayOpacity = Math.pow(maxOpacity - (xDistanceFromCenterAsPercentage + yDistanceFromCenterAsPercentage), ratio);
             }
 
+            function mouseDownEvent() {
+                self.overlaySize += .1;
+                self.overlayOpacity -= .1;
+            }
+
+            function mouseUpEvent() {
+                self.overlaySize -= .1;
+                self.overlayOpacity += .1;
+            }
+
             document.addEventListener('mousemove', mouseMoveEvent);
+            button.addEventListener('mousedown', mouseDownEvent);
+            button.addEventListener('mouseup', mouseUpEvent);
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-$primary: #fd9500;
-$white: #fff;
+@import "~@/css-config.scss";
 
-button {
+.nu-button {
     position: relative;
     font-size: 1rem;
     padding: .5em 1.5em;
@@ -84,25 +110,29 @@ button {
     border-radius: .5em;
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 5px 0px rgba($black, 0);
 
     &:focus {
         outline: none;
     }
 
-    &.primary {
+    &--primary {
         background-color: $primary;
         color: $white;
     }
 
-    &.secondary {
-        background-color: transparent;
+    &--secondary {
+        background-color: $white;
         border: solid 1px $primary;
         color: $primary;
+
+        .nu-button__cursor-highlight {
+            background: radial-gradient(ellipse at center, rgba($primary, 1) 0%,rgba($primary, 0) 100%);
+        }
     }
 }
 
-.cursor-highlight {
+.nu-button__cursor-highlight {
     position: absolute;
     width: 30%;
     height: 0;
@@ -111,11 +141,5 @@ button {
     background: radial-gradient(ellipse at center, rgba($white, 1) 0%,rgba($white, 0) 100%);
     transform: translate(-50%, -50%);
     opacity: .5;
-}
-
-.secondary {
-    .cursor-highlight {
-        background: radial-gradient(ellipse at center, rgba($primary, 1) 0%,rgba($primary, 0) 100%);
-    }
 }
 </style>

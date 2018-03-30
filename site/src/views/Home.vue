@@ -1,34 +1,49 @@
 <template>
-    <div class="home">
-        <ol>
-            <li
+    <main class="home">
+        <row>
+            <column
                 v-for="(map, index) in maps"
                 :key="index"
+                :width="3"
             >
                 <map-preview
+                    :id="map.id"
                     :title="map.title"
                 />
-            </li>
-        </ol>
-    </div>
+            </column>
+        </row>
+    </main>
 </template>
 
 <script>
-import MapPreview from '@/components/MapPreview.vue';
+import Row from '@/ui-components/Row';
+import Column from '@/ui-components/Column';
+import MapPreview from '@/components/MapPreview';
 
 export default {
     name: 'home',
     components: {
+        Row,
+        Column,
         MapPreview
     },
     data() {
         return {
             maps: [{
-                title: 'map1'
+                id: 'fgsgsf',
+                title: 'Map 1'
             }, {
-                title: 'map2'
+                id: 'sdg',
+                title: 'Map 2'
             }, {
-                title: 'map3'
+                id: 'gfva',
+                title: 'Map 3'
+            }, {
+                id: 'vrdv',
+                title: 'Map 4'
+            }, {
+                id: 'bradf',
+                title: 'Map 5'
             }]
         }
     }
@@ -36,7 +51,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/css-config.scss";
+
 .home {
-    background: grey;
+    background: $pageBackground;
 }
 </style>
