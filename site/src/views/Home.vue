@@ -1,18 +1,42 @@
 <template>
-  <div class="home">
-    <img src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div class="home">
+        <ol>
+            <li
+                v-for="(map, index) in maps"
+                :key="index"
+            >
+                <map-preview
+                    :title="map.title"
+                />
+            </li>
+        </ol>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import MapPreview from '@/components/MapPreview.vue';
 
 export default {
-  name: 'home',
-  components: {
-    HelloWorld,
-  },
+    name: 'home',
+    components: {
+        MapPreview
+    },
+    data() {
+        return {
+            maps: [{
+                title: 'map1'
+            }, {
+                title: 'map2'
+            }, {
+                title: 'map3'
+            }]
+        }
+    }
 };
 </script>
+
+<style lang="scss" scoped>
+.home {
+    background: grey;
+}
+</style>
