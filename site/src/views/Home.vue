@@ -1,5 +1,5 @@
 <template>
-    <main class="home">
+    <main class="nu-home">
         <row>
             <column
                 v-for="(map, index) in maps"
@@ -53,7 +53,7 @@ export default {
 <style lang="scss" scoped>
 @import "~@/css-config.scss";
 
-.home {
+.nu-home {
     background: $pageBackground;
 }
 </style>
