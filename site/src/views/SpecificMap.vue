@@ -1,7 +1,7 @@
 <template>
-    <div class="map">
-        <h1>{{ mapId }}</h1>
-        <img class="nu-map-preview__map-placeholder" src="https://placebear.com/1600/400">
+    <div class="nu-map-page">
+        <h1 class="nu-map-page__title">{{ mapId }}</h1>
+        <img class="nu-map-page__map-placeholder" src="https://placebear.com/1600/400">
 
         <form @submit.prevent>
             <Row>
@@ -62,5 +62,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.nu-map-page {
+    &__title {
+        display: block;
+        padding: 20px;
+    }
 
+    &__map-placeholder {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
 </style>
