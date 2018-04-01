@@ -62,10 +62,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/css-config.scss";
+
 .nu-map-page {
     &__title {
         display: block;
         padding: 20px;
+        color: $textBlack;
     }
 
     &__map-placeholder {

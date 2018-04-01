@@ -57,6 +57,7 @@ export default {
         display: block;
         width: 100%;
         padding: 20px;
+        color: $textBlack;
     }
 
     &__map-placeholder {
