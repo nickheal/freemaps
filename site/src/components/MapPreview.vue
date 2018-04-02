@@ -1,14 +1,14 @@
 <template>
     <div class="nu-map-preview">
         <h2 class="nu-map-preview__title">{{ title }}</h2>
-        <img class="nu-map-preview__map-placeholder" src="https://placebear.com/300/200">
+        <img class="nu-map-preview__map-placeholder" src="https://placebear.com/300/197">
         <div class="nu-map-preview__buttons">
             <Link
-                :text="$t('edit')"
+                icon="edit"
                 :linkTarget="editRoute"
             />
             <Button
-                :text="$t('delete')"
+                icon="trash"
                 type="secondary"
             />
         </div>
@@ -50,13 +50,16 @@ export default {
 
 .nu-map-preview {
     background: $white;
-    margin: 10px;
+    margin: 11px 10px;
     border-radius: .5em;
+    box-shadow: 1px 1px 5px 0px rgba($black, .025);
 
     &__title {
         display: block;
         width: 100%;
-        padding: 20px;
+        padding: 14px 20px 7px;
+        font-weight: 400;
+        letter-spacing: -.025em;
         color: $textBlack;
     }
 
@@ -68,7 +71,7 @@ export default {
     &__buttons {
         display: flex;
         width: 100%;
-        padding: 20px;
+        padding: 13px 20px;
 
         a,
         button {

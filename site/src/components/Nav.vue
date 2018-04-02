@@ -25,7 +25,7 @@ export default {
         letter-spacing: -.025em;
         text-decoration: none;
         color: $textBlack;
-        padding: 10px 20px;
+        padding: 10px 20px 9px;
     }
 }
 </style>

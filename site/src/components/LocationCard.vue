@@ -1,14 +1,9 @@
 <template>
     <fieldset class="nu-location-card">
         <Input
-            name="lat"
-            type="number"
+            name="location"
+            icon="map-marker"
             @input="updateLat"
-        />
-        <Input
-            name="long"
-            type="number"
-            @input="updateLong"
         />
 
         {{ lat }} - {{ long }}

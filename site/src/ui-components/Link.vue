@@ -9,6 +9,10 @@
         ref="link"
         :to="linkTarget"
     >
+        <font-awesome-icon
+            v-if="icon"
+            :icon="icon"
+        />
         <span
             class="nu-link__cursor-highlight"
             :style="{ 
@@ -24,13 +28,23 @@
 </template>
 
 <script>
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
+import { edit, trash } from '@fortawesome/fontawesome-free-solid';
+
 export default {
+    components: {
+        FontAwesomeIcon
+    },
     props: {
         type: {
             validator: value => ['primary', 'secondary'].includes(value),
             default: "primary"
         },
         text: {
+            type: String,
+            default: ""
+        },
+        icon: {
             type: String,
             default: ""
         },

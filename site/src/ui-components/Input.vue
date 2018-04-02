@@ -1,8 +1,16 @@
 <template>
     <div class="nu-input">
+        <font-awesome-icon
+            v-if="icon"
+            :icon="icon"
+            class="nu-input__icon"
+        />
         <input
             :type="type"
             class="nu-input__input"
+            :style="{
+                paddingLeft: icon ? '2em' : 0    
+            }"
             v-model="val"
             @input="onInput"
         />
@@ -10,9 +18,19 @@
 </template>
 
 <script>
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
+import { faMapMarker } from '@fortawesome/fontawesome-free-solid';
+
 export default {
+    components: {
+        FontAwesomeIcon
+    },
     props: {
         type: {
+            type: String,
+            default: null
+        },
+        icon: {
             type: String,
             default: null
         }
@@ -37,6 +55,7 @@ export default {
 @import "~@/css-config.scss";
 
 .nu-input {
+    position: relative;
     display: block;
     width: 100%;
 
@@ -49,6 +68,14 @@ export default {
         border-radius: .5em;
         padding: .5em .75em;
         box-shadow: inset -2px -2px 5px 0px rgba($black, 0.025);
+    }
+
+    &__icon {
+        position: absolute;
+        top: 50%;
+        left: .75em;
+        transform: translateY(-50%);
+        color: $textBlack;
     }
 }
 </style>
