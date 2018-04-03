@@ -1,6 +1,7 @@
 <template>
     <div class="nu-map-preview">
         <h2 class="nu-map-preview__title">{{ title }}</h2>
+        <Map/>
         <img class="nu-map-preview__map-placeholder" src="https://placebear.com/300/197">
         <div class="nu-map-preview__buttons">
             <Link
@@ -18,11 +19,13 @@
 <script>
 import Link from '@/ui-components/Link';
 import Button from '@/ui-components/Button';
+import Map from '@/ui-components/Map';
 
 export default {
     components: {
         Link,
-        Button
+        Button,
+        Map
     },
     props: {
         id: {
