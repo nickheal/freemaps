@@ -7,12 +7,21 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     state: {
-        googleMapsApiKey: keys.googleMapsApiKey
+        googleMaps: null
     },
     mutations: {
-
+        setGoogleMaps(state, googleMaps) {
+            state.googleMaps = googleMaps;
+        }
     },
     actions: {
-
+        setGoogleMaps(context, googleMaps) {
+            context.commit('setGoogleMaps', googleMaps);
+        }
     },
+    getters: {
+        googleMaps(state) {
+            return state.googleMaps
+        }
+    }
 });

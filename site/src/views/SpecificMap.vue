@@ -1,7 +1,10 @@
 <template>
     <div class="nu-map-page">
         <h1 class="nu-map-page__title">{{ mapId }}</h1>
-        <img class="nu-map-page__map-placeholder" src="https://placebear.com/1600/400">
+        
+        <Map
+            heightAspect="30%"
+        />
 
         <form @submit.prevent>
             <Row>
@@ -25,12 +28,14 @@
 <script>
 import Row from '@/ui-components/Row';
 import Column from '@/ui-components/Column';
+import Map from '@/ui-components/Map';
 import LocationCard from '@/components/LocationCard';
 
 export default {
     components: {
         Row,
         Column,
+        Map,
         LocationCard
     },
     data() {

@@ -1,8 +1,11 @@
 <template>
     <div class="nu-map-preview">
         <h2 class="nu-map-preview__title">{{ title }}</h2>
-        <Map/>
-        <img class="nu-map-preview__map-placeholder" src="https://placebear.com/300/197">
+
+        <Map
+            heightAspect="65.666%"
+        />
+
         <div class="nu-map-preview__buttons">
             <Link
                 icon="edit"
@@ -64,11 +67,6 @@ export default {
         font-weight: 400;
         letter-spacing: -.025em;
         color: $textBlack;
-    }
-
-    &__map-placeholder {
-        display: block;
-        width: 100%;
     }
 
     &__buttons {
