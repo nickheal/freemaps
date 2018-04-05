@@ -6,7 +6,10 @@ Vue.use(VueI18n);
 const messages = {
     en: {
         edit: 'Edit',
-        delete: 'Delete'
+        delete: 'Delete',
+        mapSettings: 'Map settings',
+        markers: 'Markers',
+        zoomLevel: 'Zoom level'
     }
 }
 

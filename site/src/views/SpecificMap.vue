@@ -4,9 +4,23 @@
         
         <Map
             heightAspect="30%"
+            :zoom="zoom"
         />
 
         <form @submit.prevent>
+            <legend>{{ $t('mapSettings') }}</legend>
+
+            <label>{{ $t('zoomLevel') }}</label>
+            <Input
+                type="number"
+                :min="0"
+                @input="updateZoom"
+            />
+        </form>
+
+        <form @submit.prevent>
+            <legend>{{ $t('markers') }}</legend>
+
             <Row>
                 <Column
                     v-for="(location, index) in mapPoints"
@@ -30,16 +44,19 @@ import Row from '@/ui-components/Row';
 import Column from '@/ui-components/Column';
 import Map from '@/ui-components/Map';
 import LocationCard from '@/components/LocationCard';
+import Input from '@/ui-components/Input';
 
 export default {
     components: {
         Row,
         Column,
         Map,
-        LocationCard
+        LocationCard,
+        Input
     },
     data() {
         return {
+            zoom: 1,
             mapPoints: [{
                 pointId: 'dgag',
                 lat: 4,
@@ -57,6 +74,9 @@ export default {
         }
     },
     methods: {
+        updateZoom({ e, value }) {
+            this.zoom = parseFloat(value);
+        },
         updateLocationData({pointId, lat, long }) {
             const point = this.mapPoints.find(_ => _.pointId === pointId);
             if (lat) point.lat = lat;

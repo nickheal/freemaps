@@ -25,19 +25,28 @@ import { mapGetters } from 'vuex';
 
 export default {
     props: {
-        googleMapsMap: null,
-        googleMapsMarker: null,
         heightAspect: {
             type: String,
             default: '65.666%'
         },
         center: {
             type: Object,
-            default: { lat: -25.363, lng: 131.044 }
+            default: () => ({ lat: -25.363, lng: 131.044 })
         },
         markers: {
             type: Array,
             default: () => [{ lat: -25.363, lng: 131.044 }]
+        },
+        zoom: {
+            type: Number,
+            default: 0
+        }
+    },
+    data() {
+        return {
+            mapCreated: false,
+            googleMapsMap: null,
+            googleMapsMarkers: null
         }
     },
     computed: {
@@ -47,29 +56,39 @@ export default {
     },
     watch: {
         googleMaps() {
-            this.$nextTick(() => {
-                this.createMap();
-            });
+            if (this.googleMaps && !this.mapCreated) {
+                this.$nextTick(() => {
+                    this.createMap();
+                });
+            }
+        },
+        zoom() {
+            if (!this.zoom || this.zoom < 0) return;
+            this.googleMapsMap.setZoom(this.zoom);
         }
     },
     mounted() {
-        if (this.googleMaps) {
+        if (this.googleMaps && !this.mapCreated) {
             this.createMap();
         }
     },
     methods: {
         createMap() {
+            this.mapCreated = true;
+
             this.googleMapsMap = new this.googleMaps.Map(this.$refs.map, {
-                zoom: 4,
-                center: this.center
+                zoom: this.zoom,
+                center: this.center,
+                draggable: false,
+                disableDefaultUI: true
             });
 
-            this.markers.map(marker => {
+            this.googleMapsMarkers = this.markers.map(marker => {
                 return new this.googleMaps.Marker({
                     position: marker,
                     map: this.googleMapsMap
                 });
-            })
+            });
         }
     }
 }

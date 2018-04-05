@@ -7,6 +7,8 @@
         />
         <input
             :type="type"
+            :min="type === 'number' ? min : null"
+            :max="type === 'number' ? max : null"
             class="nu-input__input"
             :style="{
                 paddingLeft: icon ? '2em' : 0    
@@ -28,6 +30,14 @@ export default {
     props: {
         type: {
             type: String,
+            default: null
+        },
+        min: {
+            type: Number,
+            default: null
+        },
+        max: {
+            type: Number,
             default: null
         },
         icon: {
