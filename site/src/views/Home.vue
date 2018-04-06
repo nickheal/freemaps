@@ -97,7 +97,12 @@ export default {
 
         &:hover {
             transform: scale(1.01);
-        box-shadow: 1px 1px 10px 0px rgba($black, .1);
+            box-shadow: 1px 1px 10px 0px rgba($black, .1);
+        }
+
+        &:active {
+            transform: scale(1);
+            box-shadow: 1px 1px 5px 0px rgba($black, .025);
         }
     }
 

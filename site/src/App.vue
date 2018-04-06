@@ -16,10 +16,5 @@ export default {
 </script>
 
 <style lang="scss">
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Helvetica, Arial, sans-serif;
-}
+@import "~@/css-config.scss";
 </style>

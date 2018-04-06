@@ -35,7 +35,7 @@ export default {
         },
         markers: {
             type: Array,
-            default: () => [{ lat: -25.363, lng: 131.044 }]
+            default: () => [] // [{ id: 'gagsfhwtgafvfshwtgafvfsgwsvavs', lat: -25.363, lng: 131.044 }]
         },
         zoom: {
             type: Number,
@@ -59,17 +59,22 @@ export default {
             if (this.googleMaps && !this.mapCreated) {
                 this.$nextTick(() => {
                     this.createMap();
+                    this.drawMarkers();
                 });
             }
         },
         zoom() {
             if (!this.zoom || this.zoom < 0) return;
             this.googleMapsMap.setZoom(this.zoom);
+        },
+        markers() {
+            this.drawMarkers();
         }
     },
     mounted() {
         if (this.googleMaps && !this.mapCreated) {
             this.createMap();
+            this.drawMarkers();
         }
     },
     methods: {
@@ -82,12 +87,22 @@ export default {
                 draggable: false,
                 disableDefaultUI: true
             });
-
+        },
+        drawMarkers() {
             this.googleMapsMarkers = this.markers.map(marker => {
-                return new this.googleMaps.Marker({
-                    position: marker,
-                    map: this.googleMapsMap
-                });
+                const alreadyExistingMarker = this.googleMapsMarkers && this.googleMapsMarkers.find(_ => _.id === marker.id);
+                
+                if (alreadyExistingMarker) {
+                    alreadyExistingMarker.marker.setPosition({ lat: marker.lat, lng: marker.lng });
+                }
+
+                return {
+                    id: marker.id,
+                    marker: alreadyExistingMarker ? alreadyExistingMarker.marker : new this.googleMaps.Marker({
+                        position: { lat: marker.lat, lng: marker.lng },
+                        map: this.googleMapsMap
+                    })
+                }
             });
         }
     }

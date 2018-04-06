@@ -11,7 +11,7 @@
             :max="type === 'number' ? max : null"
             class="nu-input__input"
             :style="{
-                paddingLeft: icon ? '2em' : 0    
+                paddingLeft: icon ? '2em' : '1em'    
             }"
             v-model="val"
             @input="onInput"
