@@ -10,8 +10,9 @@
             :min="type === 'number' ? min : null"
             :max="type === 'number' ? max : null"
             class="nu-input__input"
+            :class="{ 'nu-input__input--invalid': invalid }"
             :style="{
-                paddingLeft: icon ? '2em' : '1em'    
+                paddingLeft: icon ? '2em' : '1em'
             }"
             v-model="val"
             @input="onInput"
@@ -43,6 +44,10 @@ export default {
         icon: {
             type: String,
             default: null
+        },
+        invalid: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -78,6 +83,10 @@ export default {
         border-radius: .5em;
         padding: .5em .75em;
         box-shadow: inset -2px -2px 5px 0px rgba($black, 0.025);
+
+        &--invalid {
+            border-color: red;
+        }
     }
 
     &__icon {

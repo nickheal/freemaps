@@ -63,6 +63,11 @@ export default {
                 });
             }
         },
+        center() {
+            if (this.googleMapsMap) {
+                this.googleMapsMap.setCenter(this.center);
+            }
+        },
         zoom() {
             if (!this.zoom || this.zoom < 0) return;
             this.googleMapsMap.setZoom(this.zoom);

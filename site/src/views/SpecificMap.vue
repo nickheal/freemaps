@@ -4,6 +4,7 @@
         
         <Map
             heightAspect="30%"
+            :center="center"
             :zoom="zoom"
             :markers="mapPoints"
         />
@@ -20,6 +21,11 @@
                     type="number"
                     :min="0"
                     @input="updateZoom"
+                />
+
+                <label>{{ $t('centerPoint') }}</label>
+                <google-geocode-input
+                    @update="updateMapCenter"
                 />
             </form>
         </container>
@@ -39,7 +45,7 @@
                     >
                         <location-card
                             :id="location.id"
-                            @update="updateLocationData"
+                            @update="updateMarkerLocationData(location.id, $event)"
                         />
                     </Column>
 
@@ -61,6 +67,7 @@ import Column from '@/ui-components/Column';
 import Map from '@/ui-components/Map';
 import LocationCard from '@/components/LocationCard';
 import Input from '@/ui-components/Input';
+import GoogleGeocodeInput from '@/components/GoogleGeocodeInput';
 
 export default {
     components: {
@@ -69,10 +76,12 @@ export default {
         Column,
         Map,
         LocationCard,
-        Input
+        Input,
+        GoogleGeocodeInput
     },
     data() {
         return {
+            center: { lat: 5, lng: 5 },
             zoom: 1,
             mapPoints: [{
                 id: 'dgag',
@@ -94,9 +103,11 @@ export default {
         updateZoom({ e, value }) {
             this.zoom = parseFloat(value);
         },
-        updateLocationData({id, lat, lng }) {
+        updateMapCenter(latLng) {
+            this.center = latLng;
+        },
+        updateMarkerLocationData(id, { lat, lng }) {
             const point = this.mapPoints.find(_ => _.id === id);
-
             if (point) {
                 this.mapPoints = this.mapPoints.map(point => {
                     if (point.id === id) {

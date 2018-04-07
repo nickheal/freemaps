@@ -9,11 +9,12 @@ const messages = {
         delete: 'Delete',
         mapSettings: 'Map settings',
         markers: 'Markers',
+        centerPoint: 'Center point',
         zoomLevel: 'Zoom level'
     }
 }
 
 export default new VueI18n({
     locale: 'en',
-    messages,
+    messages
 });
