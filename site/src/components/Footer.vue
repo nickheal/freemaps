@@ -17,7 +17,7 @@ export default {
 
     &__text {
         display: block;
-        padding: 10px;
+        padding: 12px;
         margin: 0 auto;
         font-size: .7em;
         font-weight: 100;

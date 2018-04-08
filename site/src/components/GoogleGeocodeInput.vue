@@ -2,6 +2,7 @@
     <Input
         name="location"
         :invalid="noResults"
+        :value="value"
         @input="updateLatLng"
     />
 </template>
@@ -12,6 +13,12 @@ import Input from '@/ui-components/Input';
 export default {
     components: {
         Input
+    },
+    props: {
+        value: {
+            type: Number|String,
+            default: ''
+        }
     },
     data() {
         return {

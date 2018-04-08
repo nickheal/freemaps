@@ -4,6 +4,9 @@
 
         <Map
             heightAspect="65.666%"
+            :center="center"
+            :markers="markers"
+            :zoom="zoom"
         />
 
         <div class="nu-map-preview__buttons">
@@ -38,6 +41,18 @@ export default {
         title: {
             type: String,
             required: true
+        },
+        center: {
+            type: Object,
+            required: true
+        },
+        zoom: {
+            type: Number,
+            required: true
+        },
+        markers: {
+            type: Array,
+            required: true
         }
     },
     computed: {
@@ -56,7 +71,7 @@ export default {
 
 .nu-map-preview {
     background: $white;
-    margin: 11px 10px;
+    margin: 12px 10px;
     border-radius: .5em;
     box-shadow: 1px 1px 5px 0px rgba($black, .025);
 
@@ -72,7 +87,7 @@ export default {
     &__buttons {
         display: flex;
         width: 100%;
-        padding: 13px 20px;
+        padding: 10px 20px;
 
         a,
         button {

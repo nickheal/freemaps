@@ -10,6 +10,7 @@
         />
 
         <google-geocode-input
+            :value="value"
             @update="updateLatLng"
         />
     </fieldset>
@@ -24,6 +25,10 @@ export default {
     components: {
         GoogleGeocodeInput,
         FontAwesomeIcon
+    },
+    props: {
+        value: String|Number,
+        default: ''
     },
     data() {
         return {

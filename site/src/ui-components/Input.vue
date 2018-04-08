@@ -48,11 +48,15 @@ export default {
         invalid: {
             type: Boolean,
             default: false
+        },
+        value: {
+            type: String|Number,
+            default: ''
         }
     },
     data() {
         return {
-            val: null
+            val: this.value
         }
     },
     methods: {

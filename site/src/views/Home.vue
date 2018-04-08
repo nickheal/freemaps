@@ -9,6 +9,9 @@
                 <map-preview
                     :id="map.id"
                     :title="map.title"
+                    :center="map.center"
+                    :zoom="map.zoom"
+                    :markers="map.markers"
                 />
             </column>
             <column
@@ -49,22 +52,7 @@ export default {
     },
     data() {
         return {
-            maps: [{
-                id: 'fgsgsf',
-                title: 'Map 1'
-            }, {
-                id: 'sdg',
-                title: 'Map 2'
-            }, {
-                id: 'gfva',
-                title: 'Map 3'
-            }, {
-                id: 'vrdv',
-                title: 'Map 4'
-            }, {
-                id: 'bradf',
-                title: 'Map 5'
-            }]
+            maps: this.$store.state.maps
         }
     }
 };

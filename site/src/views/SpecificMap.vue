@@ -1,12 +1,12 @@
 <template>
     <div class="nu-map-page">
-        <h1 class="nu-map-page__title">{{ mapId }}</h1>
+        <h1 class="nu-map-page__title">{{ title }}</h1>
         
         <Map
             heightAspect="30%"
             :center="center"
             :zoom="zoom"
-            :markers="mapPoints"
+            :markers="markers"
         />
 
         <container class="nu-map-page__form-container">
@@ -16,15 +16,17 @@
             >
                 <legend class="nu-map-page__legend">{{ $t('mapSettings') }}</legend>
 
-                <label>{{ $t('zoomLevel') }}</label>
+                <label>{{ $t('zoom') }}</label>
                 <Input
                     type="number"
                     :min="0"
+                    :value="zoom"
                     @input="updateZoom"
                 />
 
                 <label>{{ $t('centerPoint') }}</label>
                 <google-geocode-input
+                    :value="center.name"
                     @update="updateMapCenter"
                 />
             </form>
@@ -39,12 +41,13 @@
 
                 <Row>
                     <Column
-                        v-for="(location, index) in mapPoints"
+                        v-for="(location, index) in markers"
                         :key="index"
                         :width="3"
                     >
                         <location-card
                             :id="location.id"
+                            :value="location.name"
                             @update="updateMarkerLocationData(location.id, $event)"
                         />
                     </Column>
@@ -52,7 +55,18 @@
                     <Column
                         :width="3"
                     >
-                        <div>+</div>
+                        <div class="nu-add-marker__container">
+                            <button
+                                class="nu-add-marker__item"
+                            >
+                                <font-awesome-icon
+                                    class="nu-add-marker__icon"
+                                    icon="plus-square"
+                                    color="#efefef"
+                                    size="4x"
+                                />
+                            </button>
+                        </div>
                     </Column>
                 </Row>
             </form>
@@ -68,6 +82,8 @@ import Map from '@/ui-components/Map';
 import LocationCard from '@/components/LocationCard';
 import Input from '@/ui-components/Input';
 import GoogleGeocodeInput from '@/components/GoogleGeocodeInput';
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
+import { plusSquare } from '@fortawesome/fontawesome-free-solid';
 
 export default {
     components: {
@@ -77,21 +93,17 @@ export default {
         Map,
         LocationCard,
         Input,
-        GoogleGeocodeInput
+        GoogleGeocodeInput,
+        FontAwesomeIcon
     },
     data() {
         return {
-            center: { lat: 5, lng: 5 },
+            id: '',
+            title: '',
+            center: {},
             zoom: 1,
-            mapPoints: [{
-                id: 'dgag',
-                lat: 4,
-                lng: 7
-            }, {
-                id: 'ooflof',
-                lat: 3,
-                lng: 12
-            }]
+            markers: [],
+            ...this.$store.state.maps.find(map => map.id === this.$route.params.mapId)
         }
     },
     computed: {
@@ -107,9 +119,9 @@ export default {
             this.center = latLng;
         },
         updateMarkerLocationData(id, { lat, lng }) {
-            const point = this.mapPoints.find(_ => _.id === id);
+            const point = this.markers.find(_ => _.id === id);
             if (point) {
-                this.mapPoints = this.mapPoints.map(point => {
+                this.markers = this.markers.map(point => {
                     if (point.id === id) {
                         return { id, lat, lng };
                     } else {
@@ -117,7 +129,7 @@ export default {
                     }
                 });
             } else {
-                this.mapPoints.push({ pointId, lat, lng });
+                this.markers.push({ pointId, lat, lng });
             }
         }
     }
@@ -130,7 +142,7 @@ export default {
 .nu-map-page {
     &__title {
         display: block;
-        padding: 20px;
+        padding: 16px 20px;
         color: $textBlack;
     }
 
@@ -157,6 +169,28 @@ export default {
     label {
         font-weight: 100;
         letter-spacing: -.025em;
+    }
+}
+
+.nu-add-marker {
+    &__container {
+        position: relative;
+        margin: 10px;
+        border: dashed 4px $pageBackground;
+        border-radius: 1em;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__item {
+
+    }
+
+    &__icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 }
 </style>
