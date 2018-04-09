@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Row from '@/ui-components/Row';
 import Column from '@/ui-components/Column';
 import MapPreview from '@/components/MapPreview';
@@ -50,10 +51,10 @@ export default {
         MapPreview,
         FontAwesomeIcon
     },
-    data() {
-        return {
-            maps: this.$store.state.maps
-        }
+    computed: {
+        ...mapGetters([
+            'maps'
+        ])
     }
 };
 </script>

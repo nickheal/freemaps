@@ -17,6 +17,7 @@
             <Button
                 icon="trash"
                 type="secondary"
+                @click="deleteMap"
             />
         </div>
     </div>
@@ -58,9 +59,11 @@ export default {
     computed: {
         editRoute() {
             return `/maps/edit/${this.id}`;
-        },
-        deleteRoute() {
-            return `/maps/delete/${this.id}`;
+        }
+    },
+    methods: {
+        deleteMap() {
+            this.$store.dispatch('deleteMap', this.id);
         }
     }
 }

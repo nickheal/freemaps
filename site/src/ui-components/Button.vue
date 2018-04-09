@@ -7,6 +7,7 @@
             transform: `scale(${Math.max(1, 1 + overlayOpacity / 10)})`
         }"
         ref="button"
+        @click="click"
     >
         <font-awesome-icon
             v-if="icon"
@@ -108,6 +109,9 @@ export default {
             document.addEventListener('mousemove', mouseMoveEvent);
             button.addEventListener('mousedown', mouseDownEvent);
             button.addEventListener('mouseup', mouseUpEvent);
+        },
+        click(e) {
+            this.$emit('click', e);
         }
     }
 }

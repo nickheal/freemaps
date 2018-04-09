@@ -96,11 +96,18 @@ export default {
         GoogleGeocodeInput,
         FontAwesomeIcon
     },
+    created() {
+        if (!this.$store.state.maps.find(map => map.id === this.$route.params.mapId)) {
+            this.$store.dispatch('createNewMap').then(newMapId => {
+                this.$router.push({ params: { mapId: newMapId } });
+            });
+        }
+    },
     data() {
         return {
             id: '',
             title: '',
-            center: {},
+            center: { name: 'Uluru', lat: -25.363, lng: 131.044 },
             zoom: 1,
             markers: [],
             ...this.$store.state.maps.find(map => map.id === this.$route.params.mapId)

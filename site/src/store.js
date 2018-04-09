@@ -32,17 +32,52 @@ export default new Vuex.Store({
         },
         setGoogleMapsGeocoder(state, googleMapsGeocoder) {
             state.googleMapsGeocoder = googleMapsGeocoder;
+        },
+        addNewMap(state, id) {
+            state.maps.push({
+                id,
+                title: '',
+                center: { name: 'Uluru', lat: -25.363, lng: 131.044 },
+                zoom: 1,
+                markers: []
+            });
+        },
+        deleteMap(state, id) {
+            state.maps = state.maps.filter(_ => _.id !== id);
         }
     },
     actions: {
         setGoogleMaps(context, googleMaps) {
             context.commit('setGoogleMaps', googleMaps);
             context.commit('setGoogleMapsGeocoder', new googleMaps.Geocoder());
+        },
+        createNewMap(context) {
+            let loops = 0;
+            let uidFound = false;
+            let newId;
+            while (!uidFound) {
+                loops++;
+                if (loops > 20) {
+                    throw new Error('Something has gone terribly wrong generating a UID for this map!');
+                }
+                newId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                if (!context.state.maps.find(_ => _.id === newId)) {
+                    uidFound = true;
+                }
+            }
+            context.commit('addNewMap', newId);
+            return newId;
+        },
+        deleteMap(context, id) {
+            context.commit('deleteMap', id);
         }
     },
     getters: {
         googleMaps(state) {
             return state.googleMaps
+        },
+        maps(state) {
+            return state.maps;
         }
     }
 });
