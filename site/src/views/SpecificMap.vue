@@ -206,10 +206,6 @@ export default {
         height: 100%;
     }
 
-    &__item {
-
-    }
-
     &__icon {
         position: absolute;
         top: 50%;
