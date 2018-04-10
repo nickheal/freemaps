@@ -44,6 +44,9 @@ export default new Vuex.Store({
         },
         deleteMap(state, id) {
             state.maps = state.maps.filter(_ => _.id !== id);
+        },
+        updateMapTitle(state, { id, title }) {
+            state.maps.find(_ => _.id === id).title = title;
         }
     },
     actions: {
@@ -70,6 +73,9 @@ export default new Vuex.Store({
         },
         deleteMap(context, id) {
             context.commit('deleteMap', id);
+        },
+        updateMapTitle(context, params) {
+            context.commit('updateMapTitle', params);
         }
     },
     getters: {

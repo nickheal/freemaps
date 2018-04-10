@@ -1,12 +1,18 @@
 <template>
     <div class="nu-map-page">
-        <h1 class="nu-map-page__title">{{ title }}</h1>
+        <container>
+            <label>{{ $t('title') }}</label>
+            <Input
+                :value="mapData.title"
+                @input="updateTitle"    
+            />
+        </container>
         
         <Map
             heightAspect="30%"
-            :center="center"
-            :zoom="zoom"
-            :markers="markers"
+            :center="mapData.center"
+            :zoom="mapData.zoom"
+            :markers="mapData.markers"
         />
 
         <container class="nu-map-page__form-container">
@@ -20,13 +26,13 @@
                 <Input
                     type="number"
                     :min="0"
-                    :value="zoom"
+                    :value="mapData.zoom"
                     @input="updateZoom"
                 />
 
                 <label>{{ $t('centerPoint') }}</label>
                 <google-geocode-input
-                    :value="center.name"
+                    :value="mapData.center.name"
                     @update="updateMapCenter"
                 />
             </form>
@@ -41,7 +47,7 @@
 
                 <Row>
                     <Column
-                        v-for="(location, index) in markers"
+                        v-for="(location, index) in mapData.markers"
                         :key="index"
                         :width="3"
                     >
@@ -99,36 +105,47 @@ export default {
     created() {
         if (!this.$store.state.maps.find(map => map.id === this.$route.params.mapId)) {
             this.$store.dispatch('createNewMap').then(newMapId => {
-                this.$router.push({ params: { mapId: newMapId } });
+                this.$router.replace({ params: { mapId: newMapId } });
             });
         }
     },
     data() {
-        return {
+        const preExistingMap = this.$store.state.maps.find(map => map.id === this.$route.params.mapId);
+        const defaultMap = {
             id: '',
             title: '',
             center: { name: 'Uluru', lat: -25.363, lng: 131.044 },
             zoom: 1,
-            markers: [],
-            ...this.$store.state.maps.find(map => map.id === this.$route.params.mapId)
+            markers: []
+        }
+        
+        return {
+            mapData: preExistingMap ? { ...preExistingMap } : defaultMap
         }
     },
-    computed: {
-        mapId() {
-            return this.$route.params.mapId;
+    watch: {
+        $route(to, from) {
+            this.mapData = this.$store.state.maps.find(map => map.id === this.$route.params.mapId);
         }
     },
     methods: {
+        updateTitle({ e, value }) {
+            this.mapData.title = value;
+            this.$store.dispatch('updateMapTitle', {
+                id: this.mapData.id,
+                title: value
+            });
+        },
         updateZoom({ e, value }) {
-            this.zoom = parseFloat(value);
+            this.mapData.zoom = parseFloat(value);
         },
         updateMapCenter(latLng) {
-            this.center = latLng;
+            this.mapData.center = latLng;
         },
         updateMarkerLocationData(id, { lat, lng }) {
-            const point = this.markers.find(_ => _.id === id);
+            const point = this.mapData.markers.find(_ => _.id === id);
             if (point) {
-                this.markers = this.markers.map(point => {
+                this.mapData.markers = this.mapData.markers.map(point => {
                     if (point.id === id) {
                         return { id, lat, lng };
                     } else {
@@ -136,7 +153,7 @@ export default {
                     }
                 });
             } else {
-                this.markers.push({ pointId, lat, lng });
+                this.mapData.markers.push({ pointId, lat, lng });
             }
         }
     }

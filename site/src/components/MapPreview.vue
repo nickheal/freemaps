@@ -85,6 +85,13 @@ export default {
         font-weight: 400;
         letter-spacing: -.025em;
         color: $textBlack;
+
+        &:empty {
+            &::before {
+                content: " ";
+                display: inline-block;
+            }
+        }
     }
 
     &__buttons {

@@ -10,7 +10,8 @@ const messages = {
         mapSettings: 'Map settings',
         markers: 'Markers',
         centerPoint: 'Center point',
-        zoom: 'Zoom'
+        zoom: 'Zoom',
+        title: 'Title'
     }
 }
 
