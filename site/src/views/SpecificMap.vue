@@ -64,6 +64,7 @@
                         <div class="nu-add-marker__container">
                             <button
                                 class="nu-add-marker__item"
+                                @click="addMarker"
                             >
                                 <font-awesome-icon
                                     class="nu-add-marker__icon"
@@ -155,6 +156,11 @@ export default {
             } else {
                 this.mapData.markers.push({ pointId, lat, lng });
             }
+        },
+        addMarker() {
+            this.mapData.markers.push({
+                id: 'fgfgsfgsf'
+            });
         }
     }
 }
@@ -200,6 +206,11 @@ export default {
     &__container {
         position: relative;
         margin: 10px;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__item {
         border: dashed 4px $pageBackground;
         border-radius: 1em;
         width: 100%;
