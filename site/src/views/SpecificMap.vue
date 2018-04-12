@@ -158,9 +158,15 @@ export default {
             }
         },
         addMarker() {
-            this.mapData.markers.push({
-                id: 'fgfgsfgsf'
-            });
+            let newMarkerIdFound = false;
+            let id;
+            while (!newMarkerIdFound) {
+                id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                if (!this.mapData.markers.find(marker => marker.id === id)) {
+                    newMarkerIdFound = true;
+                }
+            }
+            this.mapData.markers.push({ id });
         }
     }
 }
