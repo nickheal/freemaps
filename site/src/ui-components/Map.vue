@@ -69,10 +69,11 @@ export default {
             }
         },
         zoom() {
-            if (!this.zoom || this.zoom < 0) return;
+            if (!this.googleMaps || !this.zoom || this.zoom < 0) return;
             this.googleMapsMap.setZoom(this.zoom);
         },
         markers() {
+            if (!this.googleMaps) return;
             this.drawMarkers();
         }
     },
