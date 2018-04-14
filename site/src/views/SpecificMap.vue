@@ -214,13 +214,28 @@ export default {
         margin: 10px;
         width: 100%;
         height: 100%;
+        min-height: 102px;
     }
 
     &__item {
+        position: relative;
         border: dashed 4px $pageBackground;
         border-radius: 1em;
-        width: 100%;
-        height: 100%;
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);
+        cursor: pointer;
+        box-shadow: 1px 1px 5px 0px rgba($black, .025);
+        transition: transform 300ms, box-shadow 300ms;
+
+        &:hover {
+            transform: scale(1.01);
+            box-shadow: 1px 1px 10px 0px rgba($black, .1);
+        }
+
+        &:active {
+            transform: scale(1);
+            box-shadow: 1px 1px 5px 0px rgba($black, .025);
+        }
     }
 
     &__icon {

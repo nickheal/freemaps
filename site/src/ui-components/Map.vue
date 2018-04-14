@@ -46,7 +46,7 @@ export default {
         return {
             mapCreated: false,
             googleMapsMap: null,
-            googleMapsMarkers: null
+            googleMapsMarkers: []
         }
     },
     computed: {
@@ -96,8 +96,10 @@ export default {
         },
         drawMarkers() {
             this.googleMapsMarkers = this.markers.map(marker => {
-                const alreadyExistingMarker = this.googleMapsMarkers && this.googleMapsMarkers.find(_ => _.id === marker.id);
-                
+                if (!marker.lat || !marker.lng) return;
+
+                const alreadyExistingMarker = this.googleMapsMarkers && this.googleMapsMarkers.find(_ => _ && _.id === marker.id);
+
                 if (alreadyExistingMarker) {
                     alreadyExistingMarker.marker.setPosition({ lat: marker.lat, lng: marker.lng });
                 }
