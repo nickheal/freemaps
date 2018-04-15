@@ -1,11 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 
 import keys from '@/keys';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+    plugins: [createPersistedState({
+        paths: ['maps']
+    })],
     state: {
         googleMaps: null,
         googleMapsGeocoder: null,
