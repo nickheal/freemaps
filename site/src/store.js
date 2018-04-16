@@ -51,6 +51,9 @@ export default new Vuex.Store({
         },
         updateMapTitle(state, { id, title }) {
             state.maps.find(_ => _.id === id).title = title;
+        },
+        updateMapZoom(state, { id, zoom }) {
+            state.maps.find(_ => _.id === id).zoom = zoom;
         }
     },
     actions: {
@@ -80,6 +83,9 @@ export default new Vuex.Store({
         },
         updateMapTitle(context, params) {
             context.commit('updateMapTitle', params);
+        },
+        updateMapZoom(context, params) {
+            context.commit('updateMapZoom', params);
         }
     },
     getters: {

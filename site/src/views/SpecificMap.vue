@@ -4,7 +4,7 @@
             <label>{{ $t('title') }}</label>
             <Input
                 :value="mapData.title"
-                @input="updateTitle"    
+                @input="updateTitle"
             />
         </container>
         
@@ -139,6 +139,10 @@ export default {
         },
         updateZoom({ e, value }) {
             this.mapData.zoom = parseFloat(value);
+            this.$store.dispatch('updateMapZoom', {
+                id: this.mapData.id,
+                zoom: parseFloat(value)
+            });
         },
         updateMapCenter(latLng) {
             this.mapData.center = latLng;
