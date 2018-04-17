@@ -11,7 +11,8 @@ const messages = {
         markers: 'Markers',
         centerPoint: 'Center point',
         zoom: 'Zoom',
-        title: 'Title'
+        title: 'Title',
+        editMap: 'Edit map'
     }
 }
 

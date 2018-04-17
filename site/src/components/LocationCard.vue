@@ -51,7 +51,7 @@ export default {
     padding: 10px;
     background: $pageBackground;
     border: solid 2px $pageBackground;
-    border-radius: 1em;
+    border-radius: .5em;
 
     &__icon {
         display: block;

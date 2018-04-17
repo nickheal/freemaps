@@ -77,6 +77,7 @@ export default {
     position: relative;
     display: block;
     width: 100%;
+    margin-bottom: 21px;
 
     &__input {
         width: 100%;

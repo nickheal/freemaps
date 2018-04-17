@@ -1,6 +1,7 @@
 <template>
     <Input
         name="location"
+        class="input"
         :invalid="noResults"
         :value="value"
         @input="updateLatLng"
@@ -34,6 +35,7 @@ export default {
                     this.noResults = false;
 
                     this.$emit('update', {
+                        name: value,
                         lat: results[0].geometry.location.lat(),
                         lng: results[0].geometry.location.lng()
                     });
@@ -51,5 +53,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.input {
+    margin-bottom: 0;
+}
 </style>

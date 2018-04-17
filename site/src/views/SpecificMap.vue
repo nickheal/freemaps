@@ -1,6 +1,8 @@
 <template>
     <div class="nu-map-page">
         <container>
+            <h1 class="nu-map-page__title">{{ $t('editMap') }}</h1>
+
             <label>{{ $t('title') }}</label>
             <Input
                 :value="mapData.title"
@@ -144,8 +146,12 @@ export default {
                 zoom: parseFloat(value)
             });
         },
-        updateMapCenter(latLng) {
-            this.mapData.center = latLng;
+        updateMapCenter(nameLatLng) {
+            this.mapData.center = nameLatLng;
+            this.$store.dispatch('updateMapCenter', {
+                id: this.mapData.id,
+                center: nameLatLng
+            });
         },
         updateMarkerLocationData(id, { lat, lng }) {
             const point = this.mapData.markers.find(_ => _.id === id);
@@ -182,7 +188,7 @@ export default {
 .nu-map-page {
     &__title {
         display: block;
-        padding: 16px 20px;
+        padding: 16px 0;
         color: $textBlack;
     }
 
@@ -207,6 +213,8 @@ export default {
     }
     
     label {
+        display: block;
+        margin-bottom: 8px;
         font-weight: 100;
         letter-spacing: -.025em;
     }

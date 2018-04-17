@@ -54,6 +54,9 @@ export default new Vuex.Store({
         },
         updateMapZoom(state, { id, zoom }) {
             state.maps.find(_ => _.id === id).zoom = zoom;
+        },
+        updateMapCenter(state, { id, center }) {
+            state.maps.find(_ => _.id === id).center = center;
         }
     },
     actions: {
@@ -86,6 +89,9 @@ export default new Vuex.Store({
         },
         updateMapZoom(context, params) {
             context.commit('updateMapZoom', params);
+        },
+        updateMapCenter(context, params) {
+            context.commit('updateMapCenter', params);
         }
     },
     getters: {
