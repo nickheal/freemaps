@@ -57,6 +57,9 @@ export default new Vuex.Store({
         },
         updateMapCenter(state, { id, center }) {
             state.maps.find(_ => _.id === id).center = center;
+        },
+        updateMapMarkers(state, { id, markers }) {
+            state.maps.find(_ => _.id === id).markers = markers;
         }
     },
     actions: {
@@ -92,6 +95,9 @@ export default new Vuex.Store({
         },
         updateMapCenter(context, params) {
             context.commit('updateMapCenter', params);
+        },
+        updateMapMarkers(context, params) {
+            context.commit('updateMapMarkers', params);
         }
     },
     getters: {

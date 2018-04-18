@@ -153,19 +153,23 @@ export default {
                 center: nameLatLng
             });
         },
-        updateMarkerLocationData(id, { lat, lng }) {
+        updateMarkerLocationData(id, { name, lat, lng }) {
             const point = this.mapData.markers.find(_ => _.id === id);
             if (point) {
                 this.mapData.markers = this.mapData.markers.map(point => {
                     if (point.id === id) {
-                        return { id, lat, lng };
+                        return { id, name, lat, lng };
                     } else {
                         return point;
                     }
                 });
             } else {
-                this.mapData.markers.push({ pointId, lat, lng });
+                this.mapData.markers.push({ pointId, name, lat, lng });
             }
+            this.$store.dispatch('updateMapMarkers', {
+                id: this.mapData.id,
+                markers: this.mapData.markers
+            });
         },
         addMarker() {
             let newMarkerIdFound = false;
