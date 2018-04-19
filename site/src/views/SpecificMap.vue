@@ -1,6 +1,16 @@
 <template>
     <div class="nu-map-page">
         <container>
+            <router-link
+                to="/"
+            >
+                <font-awesome-icon
+                    class="back-icon"
+                    icon="arrow-left"
+                    color="#373737"
+                    size="2x"
+                />
+            </router-link>
             <h1 class="nu-map-page__title">{{ $t('editMap') }}</h1>
 
             <label>{{ $t('title') }}</label>
@@ -92,7 +102,7 @@ import LocationCard from '@/components/LocationCard';
 import Input from '@/ui-components/Input';
 import GoogleGeocodeInput from '@/components/GoogleGeocodeInput';
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-import { plusSquare } from '@fortawesome/fontawesome-free-solid';
+import { plusSquare, arrowLeft } from '@fortawesome/fontawesome-free-solid';
 
 export default {
     components: {
@@ -191,7 +201,7 @@ export default {
 
 .nu-map-page {
     &__title {
-        display: block;
+        display: inline-block;
         padding: 16px 0;
         color: $textBlack;
     }

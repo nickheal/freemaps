@@ -13,22 +13,7 @@ export default new Vuex.Store({
     state: {
         googleMaps: null,
         googleMapsGeocoder: null,
-        maps: [{
-            id: 'foeafadf',
-            title: 'Map 1',
-            center: {
-                name: 'Fleet',
-                lat: 45,
-                lng: 23
-            },
-            zoom: 5,
-            markers: [{
-                id: 'sgsfgasf',
-                name: 'Farnborough',
-                lat: 45,
-                lng: 23
-            }]
-        }]
+        maps: []
     },
     mutations: {
         setGoogleMaps(state, googleMaps) {

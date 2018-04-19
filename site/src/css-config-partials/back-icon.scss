@@ -1,0 +1,9 @@
+.back-icon {
+    display: inline-block;
+    margin-right: .25em;
+    transition: transform 300ms;
+
+    &:hover {
+        transform: translateX(-.2em);
+    }
+}
