@@ -1,8 +1,8 @@
 <template>
-    <div class="nu-map-page">
+    <main class="nu-map-page">
         <container>
             <router-link
-                to="/"
+                to="/maps"
             >
                 <font-awesome-icon
                     class="back-icon"
@@ -90,7 +90,7 @@
                 </Row>
             </form>
         </container>
-    </div>
+    </main>
 </template>
 
 <script>

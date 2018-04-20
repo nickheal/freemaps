@@ -1,60 +1,51 @@
 <template>
     <main class="nu-home">
-        <row>
-            <column
-                v-for="(map, index) in maps"
-                :key="index"
-                :width="3"
-            >
-                <map-preview
-                    :id="map.id"
-                    :title="map.title"
-                    :center="map.center"
-                    :zoom="map.zoom"
-                    :markers="map.markers"
-                />
-            </column>
-            <column
-                :width="3"
-            >
-                <div class="nu-add-map__container">
+        <Container>
+            <Row>
+                <Column>
+                    <h1>Welcome!</h1>
+                    <p>This is freemaps, a site designed to help with adding stylised Google maps to websited</p>
+                </Column>
+            </Row>
+            <Row>
+                <Column
+                    :width="6"
+                >
                     <router-link
-                        class="nu-add-map__item"
-                        to="/maps/edit/new"
+                        class="nu-path-choice"
+                        to="/maps"
                     >
-                        <font-awesome-icon
-                            class="nu-add-map__icon"
-                            icon="plus-square"
-                            color="white"
-                            size="6x"
-                        />
+                        <h2>Maps</h2>
                     </router-link>
-                </div>
-            </column>
-        </row>
+                </Column>
+                <Column
+                    :width="6"
+                >
+                    <router-link
+                        class="nu-path-choice"
+                        to="/themes"
+                    >
+                        <h2>Themes</h2>
+                    </router-link>
+                </Column>
+            </Row>
+        </Container>
     </main>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import Container from '@/ui-components/Container';
 import Row from '@/ui-components/Row';
 import Column from '@/ui-components/Column';
 import MapPreview from '@/components/MapPreview';
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-import { plusSquare } from '@fortawesome/fontawesome-free-solid';
 
 export default {
     name: 'home',
     components: {
+        Container,
         Row,
         Column,
-        MapPreview,
-        FontAwesomeIcon
-    },
-    computed: {
-        ...mapGetters([
-            'maps'
-        ])
+        MapPreview
     }
 };
 </script>
@@ -66,41 +57,10 @@ export default {
     background: $pageBackground;
 }
 
-.nu-add-map {
-    &__container {
-        display: block;
-        width: 100%;
-        height: 100%;
-        min-height: 300px;
-        padding: 11px 10px;
-    }
-
-    &__item {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-        border: dashed 4px $white;
-        border-radius: .5em;
-        box-shadow: 1px 1px 5px 0px rgba($black, .025);
-        transition: transform 300ms, box-shadow 300ms;
-
-        &:hover {
-            transform: scale(1.01);
-            box-shadow: 1px 1px 10px 0px rgba($black, .1);
-        }
-
-        &:active {
-            transform: scale(1);
-            box-shadow: 1px 1px 5px 0px rgba($black, .025);
-        }
-    }
-
-    &__icon {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+.nu-path-choice {
+    display: block;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
 }
 </style>
