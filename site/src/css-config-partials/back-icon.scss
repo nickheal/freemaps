@@ -3,7 +3,8 @@
     margin-right: .25em;
     transition: transform 300ms;
 
-    &:hover {
-        transform: translateX(-.2em);
+    &:hover,
+    &:focus {
+        transform: translateX(-.1em);
     }
 }

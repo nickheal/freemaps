@@ -3,6 +3,8 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Maps from './views/Maps.vue';
 import SpecificMap from './views/SpecificMap.vue';
+import Themes from './views/Themes.vue';
+import SpecificTheme from './views/SpecificTheme.vue';
 
 Vue.use(Router);
 
@@ -19,5 +21,13 @@ export default new Router({
         path: '/maps/edit/:mapId',
         name: 'map',
         component: SpecificMap,
+    }, {
+        path: '/themes',
+        name: 'themes',
+        component: Themes,
+    }, {
+        path: '/themes/edit/:themeId',
+        name: 'theme',
+        component: SpecificTheme,
     }],
 });

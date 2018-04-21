@@ -3,8 +3,8 @@
         <Container>
             <Row>
                 <Column>
-                    <h1>Welcome!</h1>
-                    <p>This is freemaps, a site designed to help with adding stylised Google maps to websited</p>
+                    <h1 class="nu-home__title">Welcome!</h1>
+                    <p class="nu-home__para">This is freemaps, a site designed to help with adding stylised Google maps to a website.</p>
                 </Column>
             </Row>
             <Row>
@@ -12,20 +12,20 @@
                     :width="6"
                 >
                     <router-link
-                        class="nu-path-choice"
+                        class="nu-path-choice nu-path-choice--maps"
                         to="/maps"
                     >
-                        <h2>Maps</h2>
+                        <h2 class="nu-path-choice__title">Maps</h2>
                     </router-link>
                 </Column>
                 <Column
                     :width="6"
                 >
                     <router-link
-                        class="nu-path-choice"
+                        class="nu-path-choice nu-path-choice--themes"
                         to="/themes"
                     >
-                        <h2>Themes</h2>
+                        <h2 class="nu-path-choice__title">Themes</h2>
                     </router-link>
                 </Column>
             </Row>
@@ -55,12 +55,83 @@ export default {
 
 .nu-home {
     background: $pageBackground;
+
+    &__title {
+        font-weight: 100;
+        letter-spacing: -.025em;
+        margin: 17px 0 15px;
+        color: $textBlack;
+    }
+
+    &__para {
+        color: $textBlack;
+    }
 }
 
 .nu-path-choice {
+    position: relative;
     display: block;
-    width: 100%;
+    margin: 20px 5% 26px;
+    width: 90%;
     height: 0;
-    padding-bottom: 100%;
+    padding-bottom: 60%;
+    border: solid 4px $primary;
+    border-radius: .5em;
+    background-color: $white;
+    box-shadow: 1px 1px 5px 0px rgba($black, .025);
+    transition: transform 300ms, box-shadow 300ms;
+
+    &:hover,
+    &:focus {
+        transform: scale(1.01);
+        box-shadow: 1px 1px 10px 0px rgba($black, .1);
+    }
+
+    &:active {
+        transform: scale(1);
+        box-shadow: 1px 1px 5px 0px rgba($black, .025);
+    }
+
+    &--maps {
+        background: url(../assets/map-tile.jpg);
+        background-size: cover;
+    }
+
+    &--themes {
+        background: url(../assets/theme-tile.png);
+        background-size: cover;
+
+        .nu-path-choice {
+            &__title {
+                color: $white;
+
+                &:before {
+                    background: rgba($textBlack, .85);
+                }
+            }
+        }
+    }
+
+    &__title {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: $textBlack;
+
+        &:before {
+            position: absolute;
+            top: -2em;
+            left: -2em;
+            z-index: -1;
+            content: "";
+            display: block;
+            border-radius: .25em;
+            background: rgba($white, .85);
+            filter: blur(16px);
+            width: calc(100% + 4em);
+            height: calc(100% + 4em);
+        }
+    }
 }
 </style>

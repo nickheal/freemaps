@@ -7,7 +7,7 @@
                 <font-awesome-icon
                     class="back-icon"
                     icon="arrow-left"
-                    color="#373737"
+                    color="#fd9500"
                     size="2x"
                 />
             </router-link>
@@ -253,7 +253,8 @@ export default {
         box-shadow: 1px 1px 5px 0px rgba($black, .025);
         transition: transform 300ms, box-shadow 300ms;
 
-        &:hover {
+        &:hover,
+        &:focus {
             transform: scale(1.01);
             box-shadow: 1px 1px 10px 0px rgba($black, .1);
         }

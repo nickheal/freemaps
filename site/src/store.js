@@ -13,7 +13,8 @@ export default new Vuex.Store({
     state: {
         googleMaps: null,
         googleMapsGeocoder: null,
-        maps: []
+        maps: [],
+        themes: []
     },
     mutations: {
         setGoogleMaps(state, googleMaps) {
