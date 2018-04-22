@@ -139,17 +139,17 @@ export default {
     }
 
     &--primary {
-        background-color: $primary;
+        background-color: $interaction;
         color: $white;
     }
 
     &--secondary {
         background-color: $white;
-        border: solid 1px $primary;
-        color: $primary;
+        border: solid 1px $interaction;
+        color: $interaction;
 
         .nu-link__cursor-highlight {
-            background: radial-gradient(ellipse at center, rgba($primary, 1) 0%,rgba($primary, 0) 100%);
+            background: radial-gradient(ellipse at center, rgba($interaction, 1) 0%,rgba($interaction, 0) 100%);
         }
     }
 }

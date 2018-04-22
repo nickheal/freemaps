@@ -5,6 +5,12 @@ Vue.use(VueI18n);
 
 const messages = {
     en: {
+        freemaps: 'Freemaps',
+        about: 'About',
+        gettingStarted: 'Getting started',
+        maps: 'Maps',
+        themes: 'Themes',
+        contact: 'Contact',
         edit: 'Edit',
         delete: 'Delete',
         mapSettings: 'Map settings',

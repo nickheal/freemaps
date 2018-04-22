@@ -75,7 +75,7 @@ export default {
     width: 90%;
     height: 0;
     padding-bottom: 60%;
-    border: solid 4px $primary;
+    border: solid 4px $interaction;
     border-radius: .5em;
     background-color: $white;
     box-shadow: 1px 1px 5px 0px rgba($black, .025);
