@@ -9,6 +9,7 @@ import SpecificTheme from './views/SpecificTheme.vue';
 Vue.use(Router);
 
 export default new Router({
+    linkActiveClass: 'is-active',
     routes: [{
         path: '/',
         name: 'home',

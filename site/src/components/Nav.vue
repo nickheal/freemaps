@@ -1,60 +1,51 @@
 <template>
-    <ol class="nu-nav">
-        <li>
-            <router-link 
-                class="nu-nav__title"
-                to="/"
-            >
-                {{ $t('freemaps') }}
-            </router-link>
-        </li>
-        <li>
-            <router-link 
-                class="nu-nav__link"
-                to="/about"
-            >
-                {{ $t('about') }}
-            </router-link>
-        </li>
-        <li>
-            <router-link 
-                class="nu-nav__link"
-                to="/getting-started"
-            >
-                {{ $t('gettingStarted') }}
-            </router-link>
-        </li>
-        <li>
-            <router-link 
-                class="nu-nav__link"
-                to="/maps"
-            >
-                {{ $t('maps') }}
-            </router-link>
-        </li>
-        <li>
-            <router-link 
-                class="nu-nav__link"
-                to="/themes"
-            >
-                {{ $t('themes') }}
-            </router-link>
-        </li>
-        <li>
-            <router-link 
-                class="nu-nav__link"
-                to="/contact"
-            >
-                {{ $t('contact') }}
-            </router-link>
-        </li>
-    </ol>
+    <div class="nu-nav">
+        <router-link 
+            class="nu-nav__title"
+            to="/"
+        >
+            {{ $t('freemaps') }}
+        </router-link>
+        <router-link 
+            class="nu-nav__link"
+            to="/about"
+        >
+            {{ $t('about') }}
+        </router-link>
+        <router-link 
+            class="nu-nav__link"
+            to="/getting-started"
+        >
+            {{ $t('gettingStarted') }}
+        </router-link>
+        <router-link 
+            class="nu-nav__link"
+            to="/maps"
+        >
+            {{ $t('maps') }}
+        </router-link>
+        <router-link 
+            class="nu-nav__link"
+            to="/themes"
+        >
+            {{ $t('themes') }}
+        </router-link>
+        <router-link 
+            class="nu-nav__link"
+            to="/contact"
+        >
+            {{ $t('contact') }}
+        </router-link>
+        <div class="nu-nav__active-marker"></div>
+    </div>
 </template>
 
 <script>
 export default {
-    mounted() {
-        console.log(this.$route)
+    watch: {
+        $route(to) {
+            console.log(to);
+        }
     }
 }
 </script>
@@ -63,9 +54,9 @@ export default {
 @import "~@/css-config.scss";
 
 .nu-nav {
+    position: relative;
     display: flex;
     align-items: center;
-    list-style-type: none;
 
     &__title {
         display: block;
@@ -77,6 +68,7 @@ export default {
     }
 
     &__link {
+        position: relative;
         display: block;
         text-decoration: none;
         text-transform: uppercase;
@@ -88,6 +80,30 @@ export default {
         &:hover,
         &:focus {
             color: $active;
+        }
+
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: transparent;
+            transform: scale(0);
+            transform-origin: bottom center;
+            transition: background-color 300ms, transform 300ms;
+        }
+
+        &.is-active {
+            position: relative;
+            color: $active;
+
+            &::after {
+                transform: scale(1);
+                background-color: $active;
+            }
         }
     }
 }
