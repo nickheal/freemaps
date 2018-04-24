@@ -1,12 +1,19 @@
 <template>
     <main class="nu-home">
-        <Container>
+        <Container class="nu-home__header">
             <Row>
                 <Column>
-                    <h1 class="nu-home__title">Welcome!</h1>
-                    <p class="nu-home__para">This is freemaps, a site designed to help with adding stylised Google maps to a website.</p>
+                    <h1 class="nu-home__title">{{ $t('homeGreeting') }}</h1>
+                    <p class="nu-home__para">{{ $t('homeIntroduction') }}</p>
+                    <Link
+                        class="nu-home__getting-started"
+                        linkTarget="/getting-started"
+                        :text="$t('gettingStarted')"
+                    />
                 </Column>
             </Row>
+        </Container>
+        <Container>
             <Row>
                 <Column
                     :width="6"
@@ -15,7 +22,7 @@
                         class="nu-path-choice nu-path-choice--maps"
                         to="/maps"
                     >
-                        <h2 class="nu-path-choice__title">Maps</h2>
+                        <h2 class="nu-path-choice__title">{{ $t('maps') }}</h2>
                     </router-link>
                 </Column>
                 <Column
@@ -25,7 +32,7 @@
                         class="nu-path-choice nu-path-choice--themes"
                         to="/themes"
                     >
-                        <h2 class="nu-path-choice__title">Themes</h2>
+                        <h2 class="nu-path-choice__title">{{ $t('themes') }}</h2>
                     </router-link>
                 </Column>
             </Row>
@@ -37,7 +44,7 @@
 import Container from '@/ui-components/Container';
 import Row from '@/ui-components/Row';
 import Column from '@/ui-components/Column';
-import MapPreview from '@/components/MapPreview';
+import Link from '@/ui-components/Link';
 
 export default {
     name: 'home',
@@ -45,7 +52,7 @@ export default {
         Container,
         Row,
         Column,
-        MapPreview
+        Link
     }
 };
 </script>
@@ -54,7 +61,11 @@ export default {
 @import "~@/css-config.scss";
 
 .nu-home {
-    background: $pageBackground;
+    background: $midGrey;
+
+    &__header {
+        background: $pageBackground;
+    }
 
     &__title {
         font-weight: 100;
@@ -65,6 +76,12 @@ export default {
 
     &__para {
         color: $textBlack;
+    }
+
+    &__getting-started {
+        display: inline-block;
+        margin-top: 9px;
+        margin-bottom: 20px;
     }
 }
 

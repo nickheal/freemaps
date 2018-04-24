@@ -5,6 +5,8 @@ Vue.use(VueI18n);
 
 const messages = {
     en: {
+        homeGreeting: 'Welcome!',
+        homeIntroduction: 'This is freemaps, a site designed to help with adding stylised Google maps to a website.',
         freemaps: 'Freemaps',
         about: 'About',
         gettingStarted: 'Getting started',
