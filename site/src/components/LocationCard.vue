@@ -8,21 +8,28 @@
             color="white"
             class="nu-location-card__icon"
         />
-
         <google-geocode-input
             :value="value"
             @update="updateLatLng"
+        />
+        <Button
+            class="nu-location-card__delete"
+            icon="trash"
+            type="secondary"
+            @click="deleteMarker"
         />
     </fieldset>
 </template>
 
 <script>
+import Button from '@/ui-components/Button';
 import GoogleGeocodeInput from '@/components/GoogleGeocodeInput';
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import { faMapMarker } from '@fortawesome/fontawesome-free-solid';
 
 export default {
     components: {
+        Button,
         GoogleGeocodeInput,
         FontAwesomeIcon
     },
@@ -38,6 +45,9 @@ export default {
     methods: {
         updateLatLng(params) {
             this.$emit('update', params);
+        },
+        deleteMarker() {
+
         }
     }
 }
@@ -47,6 +57,7 @@ export default {
 @import "~@/css-config.scss";
 
 .nu-location-card {
+    position: relative;
     margin: 10px;
     padding: 10px;
     background: $pageBackground;
@@ -56,6 +67,12 @@ export default {
     &__icon {
         display: block;
         margin: 0 auto 10px;
+    }
+
+    &__delete.nu-button {
+        position: absolute;
+        top: 5px;
+        right: 10px;
     }
 }
 </style>

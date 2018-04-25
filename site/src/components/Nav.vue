@@ -42,11 +42,7 @@
 
 <script>
 export default {
-    watch: {
-        $route(to) {
-            console.log(to);
-        }
-    }
+    
 }
 </script>
 
