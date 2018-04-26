@@ -71,7 +71,7 @@ export default {
         color: $textBlack;
         font-size: .8em;
         font-weight: 100;
-        padding: 10px 10px 9px;
+        padding: 11px 10px 10px;
 
         &:hover,
         &:focus {

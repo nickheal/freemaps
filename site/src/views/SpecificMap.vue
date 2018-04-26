@@ -59,14 +59,15 @@
 
                 <Row>
                     <Column
-                        v-for="(location, index) in mapData.markers"
-                        :key="index"
+                        v-for="location in mapData.markers"
+                        :key="location.id"
                         :width="3"
                     >
                         <location-card
                             :id="location.id"
                             :value="location.name"
                             @update="updateMarkerLocationData(location.id, $event)"
+                            @delete="deleteMarker(location.id)"
                         />
                     </Column>
 
@@ -176,6 +177,13 @@ export default {
             } else {
                 this.mapData.markers.push({ pointId, name, lat, lng });
             }
+            this.$store.dispatch('updateMapMarkers', {
+                id: this.mapData.id,
+                markers: this.mapData.markers
+            });
+        },
+        deleteMarker(id) {
+            this.mapData.markers = this.mapData.markers.filter(marker => marker.id !== id);
             this.$store.dispatch('updateMapMarkers', {
                 id: this.mapData.id,
                 markers: this.mapData.markers

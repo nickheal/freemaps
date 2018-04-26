@@ -47,7 +47,7 @@ export default {
             this.$emit('update', params);
         },
         deleteMarker() {
-
+            this.$emit('delete');
         }
     }
 }
