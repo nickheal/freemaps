@@ -5,8 +5,6 @@ Vue.use(VueI18n);
 
 const messages = {
     en: {
-        homeGreeting: 'Welcome!',
-        homeIntroduction: 'This is freemaps, a site designed to help with adding stylised Google maps to a website.',
         freemaps: 'Freemaps',
         about: 'About',
         gettingStarted: 'Getting started',
@@ -20,7 +18,25 @@ const messages = {
         centerPoint: 'Center point',
         zoom: 'Zoom',
         title: 'Title',
-        editMap: 'Edit map'
+        editMap: 'Edit map',
+
+        pages: {
+            home: {
+                title: 'Welcome!',
+                content: 'This is freemaps, a site designed to help with adding stylised Google maps to a website.'
+            },
+            about: {
+                title: 'About',
+                content: 'This page was borne out of a desire to easily customise themes for google maps to add to websites.'
+            },
+            contact: {
+                title: 'Contact',
+                name: 'Name',
+                email: 'E-mail',
+                message: 'Message',
+                send: 'Send'
+            }
+        }
     }
 }
 

@@ -2,6 +2,7 @@
     <Input
         name="location"
         class="input"
+        :label="label"
         :invalid="noResults"
         :value="value"
         @input="updateLatLng"
@@ -16,6 +17,10 @@ export default {
         Input
     },
     props: {
+        label: {
+            type: String,
+            default: ''
+        },
         value: {
             type: Number|String,
             default: ''

@@ -3,8 +3,8 @@
         <Container class="nu-home__header">
             <Row>
                 <Column>
-                    <h1 class="nu-home__title">{{ $t('homeGreeting') }}</h1>
-                    <p class="nu-home__para">{{ $t('homeIntroduction') }}</p>
+                    <page-title>{{ $t('pages.home.title') }}</page-title>
+                    <p class="nu-home__para">{{ $t('pages.home.content') }}</p>
                     <Link
                         class="nu-home__getting-started"
                         linkTarget="/getting-started"
@@ -44,6 +44,7 @@
 import Container from '@/ui-components/Container';
 import Row from '@/ui-components/Row';
 import Column from '@/ui-components/Column';
+import PageTitle from '@/ui-components/PageTitle';
 import Link from '@/ui-components/Link';
 
 export default {
@@ -52,6 +53,7 @@ export default {
         Container,
         Row,
         Column,
+        PageTitle,
         Link
     }
 };
@@ -65,13 +67,6 @@ export default {
 
     &__header {
         background: $pageBackground;
-    }
-
-    &__title {
-        font-weight: 100;
-        letter-spacing: -.025em;
-        margin: 17px 0 15px;
-        color: $textBlack;
     }
 
     &__para {

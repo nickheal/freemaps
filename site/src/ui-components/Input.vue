@@ -1,22 +1,30 @@
 <template>
     <div class="nu-input">
-        <font-awesome-icon
-            v-if="icon"
-            :icon="icon"
-            class="nu-input__icon"
-        />
-        <input
-            :type="type"
-            :min="type === 'number' ? min : null"
-            :max="type === 'number' ? max : null"
-            class="nu-input__input"
-            :class="{ 'nu-input__input--invalid': invalid }"
-            :style="{
-                paddingLeft: icon ? '2em' : '1em'
-            }"
-            v-model="val"
-            @input="onInput"
-        />
+        <label
+            v-if="label"
+            class="nu-input__label"
+        >
+            {{ label }}
+        </label>
+        <div class="nu-input__input-area">
+            <font-awesome-icon
+                v-if="icon"
+                :icon="icon"
+                class="nu-input__icon"
+            />
+            <input
+                :type="type"
+                :min="type === 'number' ? min : null"
+                :max="type === 'number' ? max : null"
+                class="nu-input__input"
+                :class="{ 'nu-input__input--invalid': invalid }"
+                :style="{
+                    paddingLeft: icon ? '2em' : '1em'
+                }"
+                v-model="val"
+                @input="onInput"
+            />
+        </div>
     </div>
 </template>
 
@@ -52,6 +60,10 @@ export default {
         value: {
             type: String|Number,
             default: ''
+        },
+        label: {
+            type: String,
+            default: ''
         }
     },
     data() {
@@ -74,10 +86,19 @@ export default {
 @import "~@/css-config.scss";
 
 .nu-input {
-    position: relative;
-    display: block;
-    width: 100%;
-    margin-bottom: 21px;
+    &__label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 100;
+        letter-spacing: -.025em;
+    }
+    
+    &__input-area {
+        position: relative;
+        display: block;
+        width: 100%;
+        margin-bottom: 21px;
+    }
 
     &__input {
         width: 100%;

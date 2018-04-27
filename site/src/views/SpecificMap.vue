@@ -13,8 +13,8 @@
             </router-link>
             <h1 class="nu-map-page__title">{{ $t('editMap') }}</h1>
 
-            <label>{{ $t('title') }}</label>
             <Input
+                :label="$t('title')"
                 :value="mapData.title"
                 @input="updateTitle"
             />
@@ -34,16 +34,16 @@
             >
                 <legend class="nu-map-page__legend">{{ $t('mapSettings') }}</legend>
 
-                <label>{{ $t('zoom') }}</label>
                 <Input
+                    :label="$t('zoom')"
                     type="number"
                     :min="0"
                     :value="mapData.zoom"
                     @input="updateZoom"
                 />
 
-                <label>{{ $t('centerPoint') }}</label>
                 <google-geocode-input
+                    :label="$t('centerPoint')"
                     :value="mapData.center.name"
                     @update="updateMapCenter"
                 />
@@ -232,13 +232,6 @@ export default {
         font-size: 1.1em;
         letter-spacing: -0.025em;
         margin: 20px 0;
-    }
-    
-    label {
-        display: block;
-        margin-bottom: 8px;
-        font-weight: 100;
-        letter-spacing: -.025em;
     }
 }
 
