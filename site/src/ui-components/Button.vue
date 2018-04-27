@@ -67,13 +67,13 @@ export default {
     },
     methods: {
         bindMouseEvents() {
-            const self = this;
             const button = this.$refs.button;
             const maxOpacity = .5;
 
-            function mouseMoveEvent(e) {
-                const xRelativeToButton = e.pageX - button.offsetLeft;
-                const yRelativeToButton = e.pageY - button.offsetTop;
+            const mouseMoveEvent = e => {
+                const boundingRect = button.getBoundingClientRect();
+                const xRelativeToButton = e.clientX - boundingRect.left;
+                const yRelativeToButton = e.clientY - boundingRect.top;
 
                 const xOffsetFromCenter = xRelativeToButton - (button.offsetWidth / 2);
                 const yOffsetFromCenter = yRelativeToButton - (button.offsetHeight / 2);
@@ -84,26 +84,26 @@ export default {
                 const xDistanceFromCenterAsPercentage = xDistanceFromCenter / button.offsetWidth;
                 const yDistanceFromCenterAsPercentage = yDistanceFromCenter / button.offsetHeight;
 
-                self.overlayPosition.x = xRelativeToButton;
-                self.overlayPosition.y = yRelativeToButton;
+                this.overlayPosition.x = xRelativeToButton;
+                this.overlayPosition.y = yRelativeToButton;
 
-                self.overlayOffsetFromCenter.x = xOffsetFromCenter;
-                self.overlayOffsetFromCenter.y = yOffsetFromCenter;
+                this.overlayOffsetFromCenter.x = xOffsetFromCenter;
+                this.overlayOffsetFromCenter.y = yOffsetFromCenter;
 
-                self.overlaySize = 50 - ((xDistanceFromCenterAsPercentage + yDistanceFromCenterAsPercentage) * 50);
+                this.overlaySize = 50 - ((xDistanceFromCenterAsPercentage + yDistanceFromCenterAsPercentage) * 50);
                 
                 const ratio = .95;
-                self.overlayOpacity = Math.pow(maxOpacity - (xDistanceFromCenterAsPercentage + yDistanceFromCenterAsPercentage), ratio);
+                this.overlayOpacity = Math.pow(maxOpacity - (xDistanceFromCenterAsPercentage + yDistanceFromCenterAsPercentage), ratio);
             }
 
-            function mouseDownEvent() {
-                self.overlaySize += .1;
-                self.overlayOpacity -= .1;
+            const mouseDownEvent = () => {
+                this.overlaySize += .1;
+                this.overlayOpacity -= .1;
             }
 
-            function mouseUpEvent() {
-                self.overlaySize -= .1;
-                self.overlayOpacity += .1;
+            const mouseUpEvent = () => {
+                this.overlaySize -= .1;
+                this.overlayOpacity += .1;
             }
 
             document.addEventListener('mousemove', mouseMoveEvent);

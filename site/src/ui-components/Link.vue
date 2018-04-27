@@ -75,11 +75,12 @@ export default {
             const maxOpacity = .5;
 
             const mouseMoveEvent = e => {
-                const xRelativeToButton = e.pageX - link.offsetLeft;
-                const yRelativeToButton = e.pageY - link.offsetTop;
+                const boundingRect = link.getBoundingClientRect();
+                const xRelativeToLink = e.clientX - boundingRect.left;
+                const yRelativeToLink = e.clientY - boundingRect.top;
 
-                const xOffsetFromCenter = xRelativeToButton - (link.offsetWidth / 2);
-                const yOffsetFromCenter = yRelativeToButton - (link.offsetHeight / 2);
+                const xOffsetFromCenter = xRelativeToLink - (link.offsetWidth / 2);
+                const yOffsetFromCenter = yRelativeToLink - (link.offsetHeight / 2);
 
                 const xDistanceFromCenter = Math.abs(xOffsetFromCenter);
                 const yDistanceFromCenter = Math.abs(yOffsetFromCenter);
@@ -87,8 +88,8 @@ export default {
                 const xDistanceFromCenterAsPercentage = xDistanceFromCenter / link.offsetWidth;
                 const yDistanceFromCenterAsPercentage = yDistanceFromCenter / link.offsetHeight;
 
-                this.overlayPosition.x = xRelativeToButton;
-                this.overlayPosition.y = yRelativeToButton;
+                this.overlayPosition.x = xRelativeToLink;
+                this.overlayPosition.y = yRelativeToLink;
 
                 this.overlayOffsetFromCenter.x = xOffsetFromCenter;
                 this.overlayOffsetFromCenter.y = yOffsetFromCenter;
