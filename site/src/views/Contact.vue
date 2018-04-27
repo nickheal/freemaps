@@ -5,7 +5,10 @@
                 <Column :width="3"></Column>
                 <Column :width="6">
                     <page-title>{{ $t('pages.contact.title') }}</page-title>
-                    <form>
+                    <form
+                        ref="form"
+                        @submit.prevent="sendMessage"
+                    >
                         <legend class="sr-only">Contact</legend>
                         <Input
                             :label="$t('pages.contact.name')"
@@ -29,6 +32,7 @@
 </template>
 
 <script>
+import anime from 'animejs';
 import Container from '@/ui-components/Container';
 import Row from '@/ui-components/Row';
 import Column from '@/ui-components/Column';
@@ -45,6 +49,32 @@ export default {
         PageTitle,
         Input,
         Button
+    },
+    methods: {
+        sendMessage() {
+            const refreshForm = anime.timeline();
+            refreshForm.add({
+                targets: this.$refs.form,
+                translateX: 40,
+                opacity: 0,
+                duration: 500,
+                easing: 'easeInQuad',
+                complete: () => this.$refs.form.reset()
+            }).add({
+                targets: this.$refs.form,
+                translateX: -40,
+                duration: 0
+            }).add({
+                targets: this.$refs.form,
+                translateX: 0,
+                opacity: 1,
+                duration: 600,
+                easing: 'easeInOutBack'
+            });
+        },
+        resetForm() {
+
+        }
     }
 };
 </script>
