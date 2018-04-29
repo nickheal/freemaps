@@ -23,6 +23,7 @@
                         <Button
                             class="nu-contact__button"
                             :text="$t('pages.contact.send')"
+                            :loading="formSubmitting"
                         />
                     </form>
                 </Column>
@@ -50,10 +51,18 @@ export default {
         Input,
         Button
     },
+    data() {
+        return {
+            formSubmitting: false
+        }
+    },
     methods: {
-        sendMessage() {
-            const refreshForm = anime.timeline();
-            refreshForm.add({
+        async sendMessage() {
+            this.formSubmitting = true;
+            await this.hitServer();
+            this.formSubmitting = false;
+
+            anime.timeline().add({
                 targets: this.$refs.form,
                 translateX: 40,
                 opacity: 0,
@@ -72,8 +81,12 @@ export default {
                 easing: 'easeInOutBack'
             });
         },
-        resetForm() {
-
+        hitServer() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve();
+                }, 2000);
+            });
         }
     }
 };

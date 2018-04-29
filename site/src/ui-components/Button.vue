@@ -23,17 +23,28 @@
                 opacity: overlayOpacity
             }"
         />
-        {{ text }}
+        <span
+            class="nu-button__text"
+            :class="{ 'nu-button__text--loading': loading }"
+        >
+            {{ text }}
+        </span>
+        <loading-spinner
+            v-if="loading"
+            class="nu-button__loading-spinner"
+        />
     </button>
 </template>
 
 <script>
+import LoadingSpinner from '@/ui-components/LoadingSpinner';
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import { edit, trash } from '@fortawesome/fontawesome-free-solid';
 
 export default {
     components: {
-        FontAwesomeIcon
+        FontAwesomeIcon,
+        LoadingSpinner
     },
     props: {
         type: {
@@ -47,6 +58,10 @@ export default {
         icon: {
             type: String,
             default: ""
+        },
+        loading: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -147,6 +162,23 @@ export default {
         .nu-button__cursor-highlight {
             background: radial-gradient(ellipse at center, rgba($interaction, 1) 0%,rgba($interaction, 0) 100%);
         }
+    }
+
+    &__text {
+        transition: opacity 300ms;
+
+        &--loading {
+            opacity: .1;
+        }
+    }
+
+    .nu-button__loading-spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 34px;
+        height: 34px;
     }
 }
 

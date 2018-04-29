@@ -4,8 +4,8 @@
     >
         <font-awesome-icon
             icon="map-marker"
-            size="2x"
-            color="white"
+            size="3x"
+            color="#beb7a4"
             class="nu-location-card__icon"
         />
         <google-geocode-input
@@ -59,14 +59,14 @@ export default {
 .nu-location-card {
     position: relative;
     margin: 10px;
-    padding: 10px;
+    padding: 10px 10px 1px;
     background: $pageBackground;
     border: solid 2px $pageBackground;
     border-radius: .5em;
 
     &__icon {
         display: block;
-        margin: 0 auto 10px;
+        margin: 0 auto 12px;
     }
 
     &__delete.nu-button {

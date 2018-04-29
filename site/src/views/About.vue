@@ -43,7 +43,7 @@ export default {
 
     &__getting-started {
         display: inline-block;
-        margin-top: 9px;
+        margin-top: 21px;
         margin-bottom: 20px;
     }
 }

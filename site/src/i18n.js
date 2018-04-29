@@ -27,7 +27,7 @@ const messages = {
             },
             about: {
                 title: 'About',
-                content: 'This page was borne out of a desire to easily customise themes for google maps to add to websites.'
+                content: 'This site was borne out of a desire to easily customise themes for google maps to add to websites.'
             },
             gettingStarted: {
                 title: 'Getting started'

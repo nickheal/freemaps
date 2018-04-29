@@ -21,6 +21,7 @@
         </container>
         
         <Map
+            class="nu-map-page__map"
             heightAspect="30%"
             :center="mapData.center"
             :zoom="mapData.zoom"
@@ -212,6 +213,11 @@ export default {
         display: inline-block;
         padding: 16px 0;
         color: $textBlack;
+    }
+
+    &__map {
+        margin-top: 25px;
+        margin-bottom: 2px;
     }
 
     &__map-placeholder {
