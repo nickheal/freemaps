@@ -58,9 +58,10 @@ export default {
     },
     methods: {
         async sendMessage() {
+            if (this.formSubmitting) return;
             this.formSubmitting = true;
+
             await this.hitServer();
-            this.formSubmitting = false;
 
             anime.timeline().add({
                 targets: this.$refs.form,
@@ -68,7 +69,10 @@ export default {
                 opacity: 0,
                 duration: 500,
                 easing: 'easeInQuad',
-                complete: () => this.$refs.form.reset()
+                complete: () => {
+                    this.$refs.form.reset();
+                    this.formSubmitting = false;
+                }
             }).add({
                 targets: this.$refs.form,
                 translateX: -40,
