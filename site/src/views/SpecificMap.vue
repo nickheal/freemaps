@@ -92,6 +92,17 @@
                 </Row>
             </form>
         </container>
+
+        <container class=nu-map-page__code-section>
+            <row>
+                <column>
+                    <p>
+                        {{ $t('pages.specificMap.thisIsTheCode') }}
+                        <Code>{{ snippet }}</Code>
+                    </p>
+                </column>
+            </row>
+        </container>
     </main>
 </template>
 
@@ -99,6 +110,7 @@
 import Container from '@/ui-components/Container';
 import Row from '@/ui-components/Row';
 import Column from '@/ui-components/Column';
+import Code from '@/ui-components/Code';
 import Map from '@/ui-components/Map';
 import LocationCard from '@/components/LocationCard';
 import Input from '@/ui-components/Input';
@@ -111,6 +123,7 @@ export default {
         Container,
         Row,
         Column,
+        Code,
         Map,
         LocationCard,
         Input,
@@ -136,6 +149,12 @@ export default {
         
         return {
             mapData: preExistingMap ? { ...preExistingMap } : defaultMap
+        }
+    },
+    computed: {
+        snippet() {
+            const attributesString = Object.keys(this.mapData).map(key => `data-${key}='${JSON.stringify(this.mapData[key])}'`).join(' ');
+            return `<div data-module='freemaps-map' ${attributesString}></div>`;
         }
     },
     watch: {
@@ -228,6 +247,13 @@ export default {
 
     &__form-container {
         box-shadow: 0px 1px 5px 0px rgba($black, .025);
+    }
+
+    &__code-section {
+        background: $pageBackground;
+        padding-top: 36px;
+        padding-bottom: 12px;
+        margin-bottom: 24px;
     }
 
     &__form {

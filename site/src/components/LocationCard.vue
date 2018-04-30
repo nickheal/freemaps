@@ -58,7 +58,7 @@ export default {
 
 .nu-location-card {
     position: relative;
-    margin: 10px;
+    margin: 10px 10px 14px;
     padding: 10px 10px 1px;
     background: $pageBackground;
     border: solid 2px $pageBackground;

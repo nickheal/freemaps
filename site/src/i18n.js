@@ -32,6 +32,9 @@ const messages = {
             gettingStarted: {
                 title: 'Getting started'
             },
+            specificMap: {
+                thisIsTheCode: 'This is the code you need to include in your site:'
+            },
             contact: {
                 title: 'Contact',
                 name: 'Name',

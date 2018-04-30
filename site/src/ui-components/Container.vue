@@ -14,6 +14,9 @@ export default {
 
 <style lang="scss" scoped>
 .nu-container {
-    padding: 0 20px;
+    padding: {
+        left: 20px;
+        right: 20px;
+    }
 }
 </style>
