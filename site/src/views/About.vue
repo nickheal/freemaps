@@ -2,7 +2,8 @@
     <main class="nu-about">
         <Container>
             <Row>
-                <Column>
+                <Column :width="3" />
+                <Column :width="6">
                     <page-title>{{ $t('pages.about.title') }}</page-title>
                     <p>{{ $t('pages.about.content') }}</p>
                     <Link

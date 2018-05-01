@@ -23,7 +23,7 @@ const messages = {
         pages: {
             home: {
                 title: 'Welcome!',
-                content: 'This is freemaps, a site designed to help with adding stylised Google maps to a website.'
+                content: `A while ago a friend asked me if it was possible to add stylised google maps to a website. My answer was yes, but then I found it surprisingly difficult to explain exactly how you'd go about doing it and I couldn't find the right tool for the job. This is where freemaps comes from. The idea is that you can create as many maps and themes as you want, combine them, and then add them to your website, using a simple JS snippet or Vue.js component.`
             },
             about: {
                 title: 'About',

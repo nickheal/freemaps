@@ -2,7 +2,8 @@
     <main class="nu-getting-started">
         <Container>
             <Row>
-                <Column>
+                <Column :width="3" />
+                <Column :width="6">
                     <page-title>{{ $t('pages.gettingStarted.title') }}</page-title>
                 </Column>
             </Row>

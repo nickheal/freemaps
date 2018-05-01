@@ -2,8 +2,9 @@
     <main class="nu-home">
         <Container class="nu-home__header">
             <Row>
-                <Column>
-                    <page-title>{{ $t('pages.home.title') }}</page-title>
+                <Column :width="3" />
+                <Column :width="6">
+                    <page-title class="nu-home__title">{{ $t('pages.home.title') }}</page-title>
                     <p class="nu-home__para">{{ $t('pages.home.content') }}</p>
                     <Link
                         class="nu-home__getting-started"
@@ -67,15 +68,22 @@ export default {
 
     &__header {
         background: $pageBackground;
+        text-align: center;
+    }
+
+    &__title {
+        margin-bottom: 12px;
     }
 
     &__para {
         color: $textBlack;
+        text-align: left;
+        line-height: 1.5;
     }
 
     &__getting-started {
         display: inline-block;
-        margin-top: 21px;
+        margin-top: 18px;
         margin-bottom: 20px;
     }
 }
