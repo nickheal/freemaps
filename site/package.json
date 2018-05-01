@@ -6,7 +6,8 @@
         "serve": "vue-cli-service serve --open",
         "build": "vue-cli-service build",
         "test": "vue-cli-service test",
-        "lint": "vue-cli-service lint"
+        "lint": "vue-cli-service lint",
+        "storybook": "start-storybook -p 9001 -c .storybook"
     },
     "dependencies": {
         "@fortawesome/fontawesome": "^1.1.5",
@@ -21,6 +22,7 @@
         "animejs": "^2.2.0"
     },
     "devDependencies": {
+        "@storybook/vue": "^3.4.3",
         "@vue/cli-plugin-babel": "^3.0.0-beta.6",
         "@vue/cli-plugin-eslint": "^3.0.0-beta.6",
         "@vue/cli-plugin-pwa": "^3.0.0-beta.6",
