@@ -39,7 +39,7 @@
 <script>
 import LoadingSpinner from '@/ui-components/LoadingSpinner';
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-import { edit, trash } from '@fortawesome/fontawesome-free-solid';
+import { edit, trash, microphone } from '@fortawesome/fontawesome-free-solid';
 
 export default {
     components: {
