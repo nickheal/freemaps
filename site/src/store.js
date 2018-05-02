@@ -11,6 +11,7 @@ export default new Vuex.Store({
         paths: ['maps', 'themes']
     })],
     state: {
+        voiceMode: false,
         googleMaps: null,
         googleMapsGeocoder: null,
         maps: [],
@@ -46,6 +47,9 @@ export default new Vuex.Store({
         },
         updateMapMarkers(state, { id, markers }) {
             state.maps.find(_ => _.id === id).markers = markers;
+        },
+        changeVoiceMode(state, newMode) {
+            state.voiceMode = newMode;
         }
     },
     actions: {
@@ -84,6 +88,12 @@ export default new Vuex.Store({
         },
         updateMapMarkers(context, params) {
             context.commit('updateMapMarkers', params);
+        },
+        activateVoiceMode(context) {
+            context.commit('changeVoiceMode', true);
+        },
+        deactivateVoiceMode(context) {
+            context.commit('changeVoiceMode', false);
         }
     },
     getters: {
@@ -92,6 +102,9 @@ export default new Vuex.Store({
         },
         maps(state) {
             return state.maps;
+        },
+        voiceMode(state) {
+            return state.voiceMode;
         }
     }
 });

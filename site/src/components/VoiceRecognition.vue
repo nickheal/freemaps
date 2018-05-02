@@ -1,17 +1,19 @@
 <template>
-    <div class="nu-voice-recognition">
-        <div class="nu-voice-recognition__content">
-            <div class="nu-voice-recognition__icon-section">
-                <font-awesome-icon
-                    class="nu-voice-recognition__icon"
-                    icon="microphone"
-                    color="#3d348b"
-                    size="6x"
-                />
+    <transition name="fade">
+        <div class="nu-voice-recognition">
+            <div class="nu-voice-recognition__content">
+                <div class="nu-voice-recognition__icon-section">
+                    <font-awesome-icon
+                        class="nu-voice-recognition__icon"
+                        icon="microphone"
+                        color="#3d348b"
+                        size="6x"
+                    />
+                </div>
+                <p class="nu-voice-recognition__playback">{{ words }}</p>
             </div>
-            <p class="nu-voice-recognition__playback">{{ words }}</p>
         </div>
-    </div>
+    </transition>
 </template>
 
 <script>
@@ -47,12 +49,24 @@ export default {
 
             annyang.start();
         }
+    },
+    destroyed() {
+        if (annyang) {
+            nnyang.abort();
+        }
     }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "~@/css-config.scss";
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
 
 .nu-voice-recognition {
     position: fixed;

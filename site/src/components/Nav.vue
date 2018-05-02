@@ -39,6 +39,7 @@
         <div class="nu-nav__active-marker"></div>
         <Button
             icon="microphone"
+            @click="$store.dispatch('activateVoiceMode')"
         />
     </div>
 </template>
