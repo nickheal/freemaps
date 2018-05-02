@@ -1,7 +1,11 @@
 <template>
-    <transition name="fade">
+    <transition v-if="annyang" name="fade">
         <div class="nu-voice-recognition">
             <div class="nu-voice-recognition__content">
+                <Button
+                    icon="times"
+                    @click="close"
+                />
                 <div class="nu-voice-recognition__icon-section">
                     <font-awesome-icon
                         class="nu-voice-recognition__icon"
@@ -11,6 +15,13 @@
                     />
                 </div>
                 <p class="nu-voice-recognition__playback">{{ words }}</p>
+                <div class="nu-voice-recognition__conversation-container">
+                    <p
+                        v-for="(m, i) in conversationHistory"
+                        :key="i"
+                        :class="`nu-voice-recognition__conversation-message nu-voice-recognition__conversation-message--${m.speaker}`"
+                    >{{ m.message }}</p>
+                </div>
             </div>
         </div>
     </transition>
@@ -18,41 +29,81 @@
 
 <script>
 import LoadingSpinner from '@/ui-components/LoadingSpinner';
+import Button from '@/ui-components/Button';
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import { microphone } from '@fortawesome/fontawesome-free-solid';
 import annyang from 'annyang';
+import speaker from '@/components/speaker';
 import router from '@/router';
+
+function capitaliseFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 export default {
     components: {
         LoadingSpinner,
+        Button,
         FontAwesomeIcon
     },
     data() {
         return {
-            words: ''
+            annyang,
+            words: '',
+            conversationHistory: []
         }
     },
     created() {
         if (annyang) {
             const commands = {
-                '(*any) about (*any)': () => router.push('/about'),
-                '(*any) how (*any)': () => router.push('/getting-started'),
-                '(*any) map(s) (*any)': () => router.push('/maps'),
-                '(*any) theme(s) (*any)': () => router.push('/themes'),
-                '(*any) home (*any)': () => router.push('/')
+                '(*any) about (*any)': () => this.navigate('/about'),
+                '(*any) how (*any)': () => this.navigate('/getting-started'),
+                '(*any) map(s) (*any)': () => this.navigate('/maps'),
+                '(*any) theme(s) (*any)': () => this.navigate('/themes'),
+                '(*any) home (*any)': () => this.navigate('/'),
+                '(*any)': () => this.speak(`I'm sorry, I don't understand`)
             };
 
             annyang.addCommands(commands);
 
-            annyang.addCallback('result', words => this.words = words[0]);
+            annyang.addCallback('result', words => {
+                const word = capitaliseFirstLetter(words[0].replace(/^\s+/g, ''));
+                this.words = word;
+                this.conversationHistory.push({
+                    speaker: 'me',
+                    message: word
+                });
+            });
 
             annyang.start();
         }
     },
+    mounted() {
+        if (annyang) {
+            this.speak('Hello, how can I help you?');
+        }
+    },
+    methods: {
+        speak(message) {
+            annyang.pause();
+            speaker.say(message).then(() => annyang.resume());
+            this.conversationHistory.push({
+                speaker: 'you',
+                message
+            });
+        },
+        navigate(path) {
+            router.push(path);
+            this.close();
+        },
+        close(cb) {
+            this.$store.dispatch('deactivateVoiceMode');
+            typeof cb === 'function' && cb();
+        }
+    },
     destroyed() {
         if (annyang) {
-            nnyang.abort();
+            annyang.abort();
         }
     }
 }
@@ -118,6 +169,61 @@ export default {
         letter-spacing: -.04em;
         text-align: center;
         color: $textBlack;
+    }
+
+    &__conversation-container {
+        display: block;
+        width: 320px;
+        max-height: 320px;
+        overflow-y: auto;
+        margin: 0 auto;
+    }
+
+    &__conversation-message {
+        position: relative;
+        display: block;
+        margin-bottom: 12px;
+        padding: 9px 24px;
+        border-radius: 1em;
+        width: 90%;
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+
+        &--me {
+            background-color: $pageBackground;
+            color: $textBlack;
+            margin-right: auto;
+            margin-left: 3px;
+            border-bottom-left-radius: 0;
+
+            &::before {
+                border-width: 0 0 12px 3px;
+                border-color: transparent transparent $pageBackground transparent;
+                right: 100%;
+            }
+        }
+
+        &--you {
+            background-color: $active;
+            color: $white;
+            margin-left: auto;
+            margin-right: 3px;
+            border-bottom-right-radius: 0;
+
+            &::before {
+                border-width: 12px 0 0 3px;
+                border-color: transparent transparent transparent $active;
+                left: 100%;
+            }
+        }
     }
 }
 
