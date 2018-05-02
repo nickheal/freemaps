@@ -6,19 +6,23 @@
                 <Column :width="6">
                     <page-title>{{ $t('pages.contact.title') }}</page-title>
                     <form
-                        ref="form"
                         @submit.prevent="sendMessage"
                     >
                         <legend class="sr-only">Contact</legend>
                         <Input
                             :label="$t('pages.contact.name')"
+                            v-model="name"
                         />
                         <Input
                             :label="$t('pages.contact.email')"
                             type="email"
+                            v-model="email"
                         />
                         <Input
+                            ref="message"
                             :label="$t('pages.contact.message')"
+                            :value="message"
+                            v-model="message"
                         />
                         <Button
                             class="nu-contact__button"
@@ -53,7 +57,10 @@ export default {
     },
     data() {
         return {
-            formSubmitting: false
+            formSubmitting: false,
+            name: '',
+            email: '',
+            message: ''
         }
     },
     methods: {
@@ -64,21 +71,21 @@ export default {
             await this.hitServer();
 
             anime.timeline().add({
-                targets: this.$refs.form,
+                targets: this.$refs.message.$el,
                 translateX: 40,
                 opacity: 0,
                 duration: 500,
                 easing: 'easeInQuad',
                 complete: () => {
-                    this.$refs.form.reset();
+                    this.message = '';
                     this.formSubmitting = false;
                 }
             }).add({
-                targets: this.$refs.form,
+                targets: this.$refs.message.$el,
                 translateX: -40,
                 duration: 0
             }).add({
-                targets: this.$refs.form,
+                targets: this.$refs.message.$el,
                 translateX: 0,
                 opacity: 1,
                 duration: 600,

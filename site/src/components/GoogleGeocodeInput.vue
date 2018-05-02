@@ -4,7 +4,7 @@
         class="input"
         :label="label"
         :invalid="noResults"
-        :value="value"
+        :value="val"
         @input="updateLatLng"
     />
 </template>
@@ -28,11 +28,12 @@ export default {
     },
     data() {
         return {
+            val: this.value,
             noResults: false
         }
     },
     methods: {
-        updateLatLng({ e, value }) {
+        updateLatLng(value) {
             this.$store.state.googleMapsGeocoder.geocode({
                 address: value
             }, (results, status) => {

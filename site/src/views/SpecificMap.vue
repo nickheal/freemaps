@@ -163,14 +163,14 @@ export default {
         }
     },
     methods: {
-        updateTitle({ e, value }) {
+        updateTitle(value) {
             this.mapData.title = value;
             this.$store.dispatch('updateMapTitle', {
                 id: this.mapData.id,
                 title: value
             });
         },
-        updateZoom({ e, value }) {
+        updateZoom(value) {
             this.mapData.zoom = parseFloat(value);
             this.$store.dispatch('updateMapZoom', {
                 id: this.mapData.id,

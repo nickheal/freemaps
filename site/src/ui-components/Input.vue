@@ -21,8 +21,8 @@
                 :style="{
                     paddingLeft: icon ? '2em' : '1em'
                 }"
-                v-model="val"
-                @input="onInput"
+                :value="value"
+                v-on="inputListeners"
             />
         </div>
     </div>
@@ -66,17 +66,17 @@ export default {
             default: ''
         }
     },
-    data() {
-        return {
-            val: this.value
-        }
-    },
-    methods: {
-        onInput(e) {
-            this.$emit('input', {
-                e: event,
-                value: this.val
-            });
+    computed: {
+        inputListeners() {
+            var vm = this;
+            return Object.assign({},
+                this.$listeners,
+                {
+                    input: function (event) {
+                        vm.$emit('input', event.target.value)
+                    }
+                }
+            );
         }
     }
 }
