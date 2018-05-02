@@ -37,12 +37,20 @@
             {{ $t('contact') }}
         </router-link>
         <div class="nu-nav__active-marker"></div>
+        <Button
+            icon="microphone"
+            @click="$store.dispatch('activateVoiceMode')"
+        />
     </div>
 </template>
 
 <script>
+import Button from '@/ui-components/Button';
+
 export default {
-    
+    components: {
+        Button
+    }
 }
 </script>
 
