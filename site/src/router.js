@@ -44,6 +44,9 @@ export default new Router({
     }, {
         path: '/contact',
         name: 'contact',
-        component: Contact
+        component: Contact,
+        props: route => ({
+            msg: route.query.msg
+        })
     }],
 });

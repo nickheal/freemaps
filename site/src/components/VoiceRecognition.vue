@@ -15,7 +15,10 @@
                     />
                 </div>
                 <p class="nu-voice-recognition__playback">{{ words }}</p>
-                <div class="nu-voice-recognition__conversation-container">
+                <div
+                    ref="conversationContainer"
+                    class="nu-voice-recognition__conversation-container"
+                >
                     <p
                         v-for="(m, i) in conversationHistory"
                         :key="i"
@@ -53,6 +56,13 @@ export default {
             conversationHistory: []
         }
     },
+    watch: {
+        conversationHistory() {
+            this.$nextTick(() => {
+                this.$refs.conversationContainer.scrollTop = this.$refs.conversationContainer.scrollHeight;
+            });
+        }
+    },
     created() {
         if (annyang) {
             const commands = {
@@ -61,7 +71,18 @@ export default {
                 '(*any) map(s) (*any)': () => this.navigate('/maps'),
                 '(*any) theme(s) (*any)': () => this.navigate('/themes'),
                 '(*any) home (*any)': () => this.navigate('/'),
-                '(*any)': () => this.speak(`I'm sorry, I don't understand`)
+                '(*any)': (msg) => {
+                    annyang.removeCommands();
+                    this.speak(`I'm sorry, I don't understand. Would you like to contact support about it?`);
+                    annyang.addCommands({
+                        '(*any) yes (*any)': () => this.navigate(`/contact?msg=${capitaliseFirstLetter(msg)}`),
+                        '(*any) no (*any)': () => {
+                            annyang.removeCommands();
+                            annyang.addCommands(commands);
+                            this.speak('How can I help you?');
+                        }
+                    });
+                }
             };
 
             annyang.addCommands(commands);
@@ -85,11 +106,16 @@ export default {
     },
     methods: {
         speak(message) {
-            annyang.pause();
-            speaker.say(message).then(() => annyang.resume());
-            this.conversationHistory.push({
-                speaker: 'you',
-                message
+            return new Promise(resolve => {
+                annyang.pause();
+                speaker.say(message).then(() => {
+                    annyang.resume();
+                    resolve();
+                });
+                this.conversationHistory.push({
+                    speaker: 'you',
+                    message
+                });
             });
         },
         navigate(path) {
@@ -125,7 +151,7 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba($midGrey, .8);
+    background-color: rgba($midGrey, .9);
 
     &__content {
         position: absolute;

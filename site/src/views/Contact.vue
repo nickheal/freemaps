@@ -55,12 +55,23 @@ export default {
         Input,
         Button
     },
+    props: {
+        msg: {
+            type: String,
+            default: ''
+        }
+    },
+    watch: {
+        msg(newMsg) {
+            this.message = newMsg;
+        }
+    },
     data() {
         return {
             formSubmitting: false,
             name: '',
             email: '',
-            message: ''
+            message: this.msg
         }
     },
     methods: {
