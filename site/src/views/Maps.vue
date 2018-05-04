@@ -1,6 +1,11 @@
 <template>
     <main class="nu-maps">
         <row>
+            <column>
+                <page-title class="nu-maps__title">{{ $t('pages.maps.title') }}</page-title>
+            </column>
+        </row>
+        <row>
             <column
                 v-for="(map, index) in maps"
                 :key="index"
@@ -39,6 +44,7 @@
 import { mapGetters } from 'vuex';
 import Row from '@/ui-components/Row';
 import Column from '@/ui-components/Column';
+import PageTitle from '@/ui-components/PageTitle';
 import MapPreview from '@/components/MapPreview';
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import { plusSquare } from '@fortawesome/fontawesome-free-solid';
@@ -48,6 +54,7 @@ export default {
     components: {
         Row,
         Column,
+        PageTitle,
         MapPreview,
         FontAwesomeIcon
     },
@@ -64,6 +71,10 @@ export default {
 
 .nu-maps {
     background: $pageBackground;
+
+    &__title {
+        margin-left: 10px;
+    }
 }
 
 .nu-add-map {

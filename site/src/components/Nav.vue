@@ -8,12 +8,6 @@
         </router-link>
         <router-link 
             class="nu-nav__link"
-            to="/about"
-        >
-            {{ $t('about') }}
-        </router-link>
-        <router-link 
-            class="nu-nav__link"
             to="/getting-started"
         >
             {{ $t('gettingStarted') }}
@@ -30,15 +24,23 @@
         >
             {{ $t('themes') }}
         </router-link>
+
+        <router-link 
+            class="nu-nav__right nu-nav__link"
+            to="/about"
+        >
+            {{ $t('about') }}
+        </router-link>
         <router-link 
             class="nu-nav__link"
             to="/contact"
         >
             {{ $t('contact') }}
         </router-link>
-        <div class="nu-nav__active-marker"></div>
         <Button
+            class="nu-nav__mic"
             icon="microphone"
+            type="secondary"
             @click="$store.dispatch('activateVoiceMode')"
         />
     </div>
@@ -109,6 +111,14 @@ export default {
                 background-color: $active;
             }
         }
+    }
+
+    &__right {
+        margin-left: auto;
+    }
+
+    &__mic {
+        margin: 0 10px;
     }
 }
 </style>
