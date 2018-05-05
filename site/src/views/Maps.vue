@@ -50,7 +50,7 @@ import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
 import { plusSquare } from '@fortawesome/fontawesome-free-solid';
 
 export default {
-    name: 'home',
+    name: 'maps',
     components: {
         Row,
         Column,
