@@ -69,7 +69,8 @@ export default {
         font-weight: 100;
         letter-spacing: -.025em;
         text-decoration: none;
-        color: $textBlack;
+        color: $white;
+        background-color: $interaction;
         padding: 10px 20px 9px;
     }
 
