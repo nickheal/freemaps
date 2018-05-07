@@ -42,6 +42,7 @@
             icon="microphone"
             type="secondary"
             @click="$store.dispatch('activateVoiceMode')"
+            :disabled="!speechRecognition()"
         />
     </div>
 </template>
@@ -52,6 +53,15 @@ import Button from '@/ui-components/Button';
 export default {
     components: {
         Button
+    },
+    methods: {
+        speechRecognition() {
+            return window.SpeechRecognition ||
+                window.webkitSpeechRecognition ||
+                window.mozSpeechRecognition ||
+                window.msSpeechRecognition ||
+                window.oSpeechRecognition;
+        }
     }
 }
 </script>

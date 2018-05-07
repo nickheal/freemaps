@@ -2,12 +2,10 @@
     <button
         class="nu-button"
         :class="buttonClass"
-        :style="{
-            boxShadow: `${-overlayOffsetFromCenter.x / 20}px ${-overlayOffsetFromCenter.y / 20}px ${overlayOpacity * 10}px 0px rgba(0, 0, 0, ${overlayOpacity})`,
-            transform: `scale(${Math.max(1, 1 + overlayOpacity / 10)})`
-        }"
+        :style="buttonHighlightStyle"
         ref="button"
         @click="click"
+        :disabled="disabled ? 'disabled' : null"
     >
         <font-awesome-icon
             v-if="icon"
@@ -15,13 +13,7 @@
         />
         <span
             class="nu-button__cursor-highlight"
-            :style="{ 
-                top: `${overlayPosition.y}px`,
-                left: `${overlayPosition.x}px`,
-                width: `${overlaySize}%`,
-                paddingBottom: `${overlaySize}%`,
-                opacity: overlayOpacity
-            }"
+            :style="highlightStyle"
         />
         <span
             class="nu-button__text"
@@ -62,6 +54,10 @@ export default {
         loading: {
             type: Boolean,
             default: false
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -77,7 +73,25 @@ export default {
     },
     computed: {
         buttonClass() {
-            return `nu-button--${this.type}`;
+            return [
+                `nu-button--${this.type}`,
+                this.disabled && 'nu-button--disabled'
+            ].filter(_ => _).join(' ');
+        },
+        buttonHighlightStyle() {
+            return !this.disabled && {
+                boxShadow: `${-overlayOffsetFromCenter.x / 20}px ${-overlayOffsetFromCenter.y / 20}px ${overlayOpacity * 10}px 0px rgba(0, 0, 0, ${overlayOpacity})`,
+                transform: `scale(${Math.max(1, 1 + overlayOpacity / 10)})`
+            }
+        },
+        highlightStyle() {
+            return !this.disabled && { 
+                top: `${this.overlayPosition.y}px`,
+                left: `${this.overlayPosition.x}px`,
+                width: `${this.overlaySize}%`,
+                paddingBottom: `${this.overlaySize}%`,
+                opacity: this.overlayOpacity
+            };
         }
     },
     methods: {
@@ -152,6 +166,12 @@ export default {
     &--primary {
         background-color: $interaction;
         color: $white;
+
+        &.nu-button {
+            &--disabled {
+                background-color: $disabledInteraction;
+            }
+        }
     }
 
     &--secondary {
@@ -159,9 +179,28 @@ export default {
         border: solid 1px $interaction;
         color: $interaction;
 
-        .nu-button__cursor-highlight {
-            background: radial-gradient(ellipse at center, rgba($interaction, 1) 0%,rgba($interaction, 0) 100%);
+        .nu-button {
+            &__cursor-highlight {
+                background: radial-gradient(ellipse at center, rgba($interaction, 1) 0%,rgba($interaction, 0) 100%);
+            }
         }
+
+        &.nu-button {
+            &--disabled {
+                color: $disabledInteraction;
+                border-color: $disabledInteraction;
+
+                .nu-button {
+                    &__cursor-highlight {
+                        background: radial-gradient(ellipse at center, rgba($disabledInteraction, 1) 0%,rgba($disabledInteraction, 0) 100%);
+                    }
+                }
+            }
+        }
+    }
+
+    &--disabled {
+        opacity: .5;
     }
 
     &__text {
