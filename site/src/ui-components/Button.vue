@@ -80,8 +80,8 @@ export default {
         },
         buttonHighlightStyle() {
             return !this.disabled && {
-                boxShadow: `${-overlayOffsetFromCenter.x / 20}px ${-overlayOffsetFromCenter.y / 20}px ${overlayOpacity * 10}px 0px rgba(0, 0, 0, ${overlayOpacity})`,
-                transform: `scale(${Math.max(1, 1 + overlayOpacity / 10)})`
+                boxShadow: `${-this.overlayOffsetFromCenter.x / 20}px ${-this.overlayOffsetFromCenter.y / 20}px ${this.overlayOpacity * 10}px 0px rgba(0, 0, 0, ${this.overlayOpacity})`,
+                transform: `scale(${Math.max(1, 1 + this.overlayOpacity / 10)})`
             }
         },
         highlightStyle() {
