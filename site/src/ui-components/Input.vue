@@ -23,6 +23,7 @@
                 }"
                 :value="value"
                 v-on="inputListeners"
+                :required="required"
             />
         </div>
     </div>
@@ -64,6 +65,10 @@ export default {
         label: {
             type: String,
             default: ''
+        },
+        required: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {

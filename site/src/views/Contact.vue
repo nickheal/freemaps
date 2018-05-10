@@ -23,6 +23,7 @@
                             :label="$t('pages.contact.message')"
                             :value="message"
                             v-model="message"
+                            required
                         />
                         <Button
                             class="nu-contact__button"

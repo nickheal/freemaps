@@ -72,7 +72,9 @@ export default {
     }
 
     &__title {
-        margin-bottom: 12px;
+        font-size: 4em;
+        margin-top: 35px;
+        margin-bottom: 6px;
     }
 
     &__para {
@@ -84,7 +86,7 @@ export default {
     &__getting-started {
         display: inline-block;
         margin-top: 18px;
-        margin-bottom: 20px;
+        margin-bottom: 43px;
     }
 }
 
