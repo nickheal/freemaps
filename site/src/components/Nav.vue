@@ -81,6 +81,7 @@ export default {
         text-decoration: none;
         color: $white;
         background-color: $interaction;
+        margin-right: 10px;
         padding: 10px 20px 9px;
     }
 

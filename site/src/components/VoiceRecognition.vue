@@ -224,7 +224,7 @@ export default {
         }
 
         &--me {
-            background-color: $pageBackground;
+            background-color: rgba($pageBackground, .75);
             color: $textBlack;
             margin-right: auto;
             margin-left: 3px;
@@ -238,7 +238,7 @@ export default {
         }
 
         &--you {
-            background-color: $active;
+            background-color: rgba($active, .75);
             color: $white;
             margin-left: auto;
             margin-right: 3px;
