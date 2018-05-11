@@ -4,7 +4,8 @@
             <Row>
                 <Column :width="3" />
                 <Column :width="6">
-                    <page-title class="nu-home__title">{{ $t('pages.home.title') }}</page-title>
+                    <page-title class="nu-home__title">{{ $t('freemaps') }}</page-title>
+                    <h2 class="nu-home__tagline">{{ $t('tagline') }}</h2>
                     <p class="nu-home__para">{{ $t('pages.home.content') }}</p>
                     <Link
                         class="nu-home__getting-started"
@@ -73,8 +74,16 @@ export default {
 
     &__title {
         font-size: 4em;
-        margin-top: 35px;
-        margin-bottom: 6px;
+        line-height: 1;
+        margin-top: 40px;
+        margin-bottom: 9px;
+    }
+
+    &__tagline {
+        font-size: 2em;
+        text-transform: uppercase;
+        margin-bottom: 13px;
+        color: $midGrey;
     }
 
     &__para {

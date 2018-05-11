@@ -6,6 +6,7 @@ Vue.use(VueI18n);
 const messages = {
     en: {
         freemaps: 'Freemaps',
+        tagline: 'Themed. Maps. Simple.',
         about: 'About',
         gettingStarted: 'Getting started',
         maps: 'Maps',
