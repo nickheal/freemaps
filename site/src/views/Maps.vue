@@ -17,6 +17,8 @@
                     :center="map.center"
                     :zoom="map.zoom"
                     :markers="map.markers"
+                    :edit="`/maps/edit/${map.id}`"
+                    @delete="$store.dispatch('deleteMap', map.id);"
                 />
             </column>
             <column

@@ -73,6 +73,7 @@ export default {
     position: relative;
     display: flex;
     align-items: center;
+    background-color: rgba($white, .9);
 
     &__title {
         display: block;

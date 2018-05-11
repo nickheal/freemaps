@@ -13,7 +13,6 @@ const messages = {
         contact: 'Contact',
         edit: 'Edit',
         delete: 'Delete',
-        mapSettings: 'Map settings',
         markers: 'Markers',
         centerPoint: 'Center point',
         zoom: 'Zoom',
@@ -32,14 +31,20 @@ const messages = {
             maps: {
                 title: 'Maps',
             },
+            specificMap: {
+                title: 'Edit map',
+                mapSettings: 'Map settings',
+                thisIsTheCode: 'This is the code you need to include in your site:'
+            },
             themes: {
                 title: 'Themes',
             },
+            specificTheme: {
+                title: 'Edit theme',
+                themeSettings: 'Theme settings',
+            },
             gettingStarted: {
                 title: 'Getting started'
-            },
-            specificMap: {
-                thisIsTheCode: 'This is the code you need to include in your site:'
             },
             contact: {
                 title: 'Contact',

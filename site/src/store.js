@@ -33,8 +33,17 @@ export default new Vuex.Store({
                 markers: []
             });
         },
+        addNewTheme(state, id) {
+            state.themes.push({
+                id,
+                title: ''
+            });
+        },
         deleteMap(state, id) {
             state.maps = state.maps.filter(_ => _.id !== id);
+        },
+        deleteTheme(state, id) {
+            state.themes = state.themes.filter(_ => _.id !== id);
         },
         updateMapTitle(state, { id, title }) {
             state.maps.find(_ => _.id === id).title = title;
@@ -74,8 +83,28 @@ export default new Vuex.Store({
             context.commit('addNewMap', newId);
             return newId;
         },
+        createNewTheme(context) {
+            let loops = 0;
+            let uidFound = false;
+            let newId;
+            while (!uidFound) {
+                loops++;
+                if (loops > 20) {
+                    throw new Error('Something has gone terribly wrong generating a UID for this theme!');
+                }
+                newId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                if (!context.state.maps.find(_ => _.id === newId)) {
+                    uidFound = true;
+                }
+            }
+            context.commit('addNewTheme', newId);
+            return newId;
+        },
         deleteMap(context, id) {
             context.commit('deleteMap', id);
+        },
+        deleteTheme(context, id) {
+            context.commit('deleteTheme', id);
         },
         updateMapTitle(context, params) {
             context.commit('updateMapTitle', params);
@@ -102,6 +131,9 @@ export default new Vuex.Store({
         },
         maps(state) {
             return state.maps;
+        },
+        themes(state) {
+            return state.themes;
         },
         voiceMode(state) {
             return state.voiceMode;

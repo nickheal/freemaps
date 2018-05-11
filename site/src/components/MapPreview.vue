@@ -12,12 +12,12 @@
         <div class="nu-map-preview__buttons">
             <Link
                 icon="edit"
-                :linkTarget="editRoute"
+                :linkTarget="edit"
             />
             <Button
                 icon="trash"
                 type="secondary"
-                @click="deleteMap"
+                @click="$emit('delete')"
             />
         </div>
     </div>
@@ -54,16 +54,10 @@ export default {
         markers: {
             type: Array,
             required: true
-        }
-    },
-    computed: {
-        editRoute() {
-            return `/maps/edit/${this.id}`;
-        }
-    },
-    methods: {
-        deleteMap() {
-            this.$store.dispatch('deleteMap', this.id);
+        },
+        edit: {
+            type: String,
+            required: true
         }
     }
 }

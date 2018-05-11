@@ -11,7 +11,7 @@
                     size="2x"
                 />
             </router-link>
-            <h1 class="nu-map-page__title">{{ $t('editMap') }}</h1>
+            <h1 class="nu-map-page__title">{{ $t('pages.specificMap.title') }}</h1>
 
             <Input
                 :label="$t('title')"
@@ -33,7 +33,7 @@
                 class="nu-map-page__form"
                 @submit.prevent
             >
-                <legend class="nu-map-page__legend">{{ $t('mapSettings') }}</legend>
+                <legend class="nu-map-page__legend">{{ $t('pages.specificMap.mapSettings') }}</legend>
 
                 <Input
                     :label="$t('zoom')"

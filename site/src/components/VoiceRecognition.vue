@@ -232,7 +232,7 @@ export default {
 
             &::before {
                 border-width: 0 0 12px 3px;
-                border-color: transparent transparent $pageBackground transparent;
+                border-color: transparent transparent rgba($pageBackground, .75) transparent;
                 right: 100%;
             }
         }
@@ -246,7 +246,7 @@ export default {
 
             &::before {
                 border-width: 12px 0 0 3px;
-                border-color: transparent transparent transparent $active;
+                border-color: transparent transparent transparent rgba($active, .75);
                 left: 100%;
             }
         }
