@@ -1,5 +1,5 @@
 <template>
-    <main class="nu-map-page">
+    <main class="nu-map-page" v-if="mapData">
         <container>
             <router-link
                 to="/maps"
@@ -138,17 +138,8 @@ export default {
         }
     },
     data() {
-        const preExistingMap = this.$store.state.maps.find(map => map.id === this.$route.params.mapId);
-        const defaultMap = {
-            id: '',
-            title: '',
-            center: { name: 'Uluru', lat: -25.363, lng: 131.044 },
-            zoom: 1,
-            markers: []
-        }
-        
         return {
-            mapData: preExistingMap ? { ...preExistingMap } : defaultMap
+            mapData: this.$store.state.maps.find(map => map.id === this.$route.params.mapId)
         }
     },
     computed: {

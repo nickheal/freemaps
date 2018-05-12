@@ -37,7 +37,7 @@ export default new Vuex.Store({
             state.themes.push({
                 id,
                 title: '',
-                roads: '#ff0000'
+                roads: '#fff3ae'
             });
         },
         deleteMap(state, id) {

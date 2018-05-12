@@ -1,5 +1,5 @@
 <template>
-    <main class="nu-theme-page">
+    <main class="nu-theme-page" v-if="themeData">
         <Map
             class="nu-theme-page__map"
             heightAspect="100vh"
@@ -71,15 +71,8 @@ export default {
         }
     },
     data() {
-        const preExistingMap = this.$store.state.themes.find(theme => theme.id === this.$route.params.themeId);
-        const defaultTheme = {
-            id: '',
-            title: '',
-            roads: '#ff0000'
-        }
-        
         return {
-            themeData: preExistingMap ? { ...preExistingMap } : defaultTheme
+            themeData: this.$store.state.themes.find(theme => theme.id === this.$route.params.themeId)
         }
     },
     watch: {
