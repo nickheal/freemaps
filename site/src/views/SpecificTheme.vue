@@ -35,13 +35,11 @@
             >
                 <legend class="nu-theme-page__legend">{{ $t('pages.specificTheme.themeSettings') }}</legend>
 
-                <!-- <Input
-                    :label="$t('zoom')"
-                    type="number"
-                    :min="0"
-                    :value="mapData.zoom"
-                    @input="updateZoom"
-                /> -->
+                <Input
+                    :label="$t('pages.specificTheme.roads')"
+                    type="color"
+                    :value="themeData.roads"
+                />
             </form>
         </container>
     </main>
@@ -76,7 +74,8 @@ export default {
         const preExistingMap = this.$store.state.themes.find(theme => theme.id === this.$route.params.themeId);
         const defaultTheme = {
             id: '',
-            title: ''
+            title: '',
+            roads: '#ff0000'
         }
         
         return {

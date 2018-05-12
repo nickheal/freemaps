@@ -19,7 +19,8 @@
                 class="nu-input__input"
                 :class="{ 'nu-input__input--invalid': invalid }"
                 :style="{
-                    paddingLeft: icon ? '2em' : '1em'
+                    paddingLeft: icon ? '2em' : '1em',
+                    height: type === 'color' ? '50px' : ''
                 }"
                 :value="value"
                 v-on="inputListeners"

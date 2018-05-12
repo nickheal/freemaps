@@ -43,6 +43,7 @@ const messages = {
             specificTheme: {
                 title: 'Edit theme',
                 themeSettings: 'Theme settings',
+                roads: 'Roads'
             },
             gettingStarted: {
                 title: 'Getting started'
